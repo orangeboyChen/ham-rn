@@ -3,7 +3,8 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import CasMobileLogin from './components/cas/CasMobileLoginView';
+import Common from './components/common/Common';
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent('RNCasMobileLogin', () => CasMobileLogin);
+AppRegistry.registerComponent('RNCommon', () => Common);
