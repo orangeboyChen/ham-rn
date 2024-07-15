@@ -2,6 +2,12 @@ import React, {useEffect} from 'react';
 import codePush from 'react-native-code-push';
 import {View} from 'react-native';
 
+/**
+ * @author orangeboyChen
+ * @version 1.0
+ * @date 2024/7/15 18:10
+ */
+
 function Common() {
   useEffect(() => {
     console.log('Common - mounted');

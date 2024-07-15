@@ -1,8 +1,12 @@
 import {NativeModules} from 'react-native';
 const {CasMobileLoginModule} = NativeModules;
 
-interface CalendarInterface {
-  onRequestSuccess(studentId: string, password: string, cookie: string): void;
-}
+/**
+ * @author orangeboyChen
+ * @version 1.0
+ * @date 2024/7/15 18:10
+ */
 
-export default CasMobileLoginModule as CalendarInterface;
+export default CasMobileLoginModule as {
+  onRequestSuccess(studentId: string, password: string, cookie: string): void;
+};

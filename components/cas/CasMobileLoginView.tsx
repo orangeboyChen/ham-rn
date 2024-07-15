@@ -4,7 +4,12 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import CookieManager, {Cookies} from '@react-native-cookies/cookies';
 import {Platform, StyleSheet} from 'react-native';
 import CasMobileLoginModule from '../../modules/CasMobileLoginModule.ts';
-import codePush from 'react-native-code-push';
+
+/**
+ * @author orangeboyChen
+ * @version 1.0
+ * @date 2024/7/15 18:10
+ */
 
 const runFirst = `
    function sendMessage(status, type, username, password) {

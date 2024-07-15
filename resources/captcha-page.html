@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script src="https://cdn.dingxiang-inc.com/ctu-group/captcha-ui/index.js" crossorigin="anonymous"></script>
+
+    <title>正在加载 Loading</title>
+    <!-- 验证码程序依赖(必须) -->
+
+    <style type="text/css">
+
+		/*reset*/
+		body {
+			background: #fff;
+			font-family: arial;
+		}
+		body,p,form,ol,ul,li,h3 {
+			margin: 0;
+			padding: 0;
+			word-break: break-word;margin-top: 0px;margin-bottom: 0px;
+		}
+		ol,ul,li {
+			list-style: none;
+		}
+		table,img {
+			border: 0;
+		}
+		td {
+			font-size: 9pt;
+			line-height: 18px;
+		}
+		input {
+			padding-top: 0;
+			padding-bottom: 0;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		em,cite {
+			font-style: normal;
+		}
+		em {
+			color: #cc0000;
+		}
+		a em {
+			text-decoration: underline;
+		}
+		/*main*/
+		#doc {
+			#min-width: 880px;
+			_zoom: 1;
+			font-size: 13px;
+		}
+		#header {
+			background: #f8f8f8;
+			height: 83px;
+			border-bottom: 1px solid #ebebeb;
+			padding: 30px 0 0 30px;
+		}
+		#header .link {
+			width: 245px;
+			height: 78px;
+			background: url(https://www.whu.edu.cn/ch_template/img/logo.png) no-repeat;
+			background-image: -webkit-image-set(url(https://www.whu.edu.cn/ch_template/img/logo.png) 1x, url(https://www.whu.edu.cn/ch_template/img/logo.png) 2x);
+			_background: none;
+			_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="https://www.whu.edu.cn/ch_template/img/logo.png");
+			overflow: hidden;
+			display: inline-block;
+		}
+		#container .panel {
+			padding: 10px 0 0 40px;
+			overflow: hidden;
+			white-space: wrap;
+		}
+		#container .panel .title {
+			font-size: 15px;
+			font-weight: bold;
+			line-height: 30px;
+			color: #339a9a;
+			white-space: wrap;
+		}
+		#container .panel .captcha {
+			margin: 10px 0;
+		}
+		#container .panel .feedback,
+		#container .panel .why {
+			color: #000000;
+			line-height: 25px;
+		}
+		#container .panel .why {
+			margin-top: 25px;
+			padding-bottom: 50px;
+		}
+		#container .panel .why strong {
+			display: block;
+			font-size: 16px;
+			color: #333;
+			margin-bottom: 5px;
+		}
+		#footer {
+			background: #fafafa;
+			color: #999;
+			font-size: 12px;
+			line-height: 53px;
+			height: 53px;
+			margin-top: 30px;
+			padding-left: 20px;
+		}
+		#footer .link {
+			color: inherit;
+			text-decoration: none;
+			margin: 0 8px;
+		}
+		#footer .splitor {
+			color: #ccc;
+			margin: 0 5px;
+		}
+		#footer .copy {
+			margin-left: 15px;
+		}
+
+	</style>
+
+
+
+</head>
+<body link="#0000cc">
+<div id="doc">
+    <div id="header">
+        <a href="" class="link" title="WHU Homepage"></a>
+    </div>
+    <div id="container">
+        <div class="panel">
+            <h4 class="title">请再次完成认证<br> You need to complete the validation action again.</h4>
+            <div id="div1"></div>
+        </div>
+    </div>
+    <div id="footer">
+        <a class="link" href="" target="_blank"></a><span class="copy">Copyright © WHU 2021</span>
+    </div>
+
+
+
+
+
+</div>
+<script>
+			var myCaptcha = _dx.Captcha(document.getElementById('div1'), {
+            style: 'embed',
+            appId: '97f21767358533b1992e4099a4c3bae6', //appId，在控制台中“应用管理”或“应用配置”模块获取
+            apiServer: 'https://dxvip.dingxiang-inc.com', // 请填写这个配置，按照下面“接入域名”所示!注意：末尾不要有斜杆！
+            success: function (token) {
+                console.log('token:', token)
+                var message = {
+                    'token': token
+                }
+                window.ReactNativeWebView.postMessage(JSON.stringify(message))
+            }
+        })
+    </script>
+</body>
+</html>
