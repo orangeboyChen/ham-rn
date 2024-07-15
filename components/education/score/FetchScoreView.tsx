@@ -1,7 +1,7 @@
 /**
  * @author orangeboyChen
  * @version 1.0
- * @date 2024/7/15 18:17
+ * @date 2024/7/16 00:39
  */
 import React, {useState} from 'react';
 import {
@@ -12,23 +12,22 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {getCourseList} from '../../../business/education/course';
+import {CaptchaView} from '../CaptchaView.tsx';
 import EducationModule from '../../../modules/EducationModule.ts';
 import {loginEducation} from '../../../business/education';
-import {CaptchaView} from '../CaptchaView.tsx';
+import {getScoreList} from '../../../business/education/score';
 
-const FetchCourseView = (): React.ReactElement => {
+const FetchScoreView = (): React.ReactElement => {
   const [captchaToken, setCaptchaToken] = useState('');
-
   let container;
   if (captchaToken.length === 0) {
     container = (
       <CaptchaView
         onGetToken={(token: string) => {
           setCaptchaToken(token);
-          doGetCourseList(token).catch(err => {
+          doGetScoreList(token).catch(err => {
             console.log(err);
-            EducationModule.onGetCourseList({}, err.message);
+            EducationModule.onGetScoreList('', '', err.message);
           });
         }}
       />
@@ -44,20 +43,14 @@ const FetchCourseView = (): React.ReactElement => {
   return <View style={containerStyle}>{container}</View>;
 };
 
-const doGetCourseList = async (captchaToken: string) => {
+const doGetScoreList = async (captchaToken: string) => {
   await loginEducation();
-  const {year, semester} = await EducationModule.getCourseConfig();
-  const courseListResult = await getCourseList({
-    year,
-    semester,
+  const [scoreList, userInfo] = await getScoreList({
     validate: captchaToken,
   });
-  const result: any = {};
-  for (let entry of courseListResult.entries()) {
-    const [course, courseGridList] = entry;
-    result[JSON.stringify(course)] = JSON.stringify(courseGridList);
-  }
-  EducationModule.onGetCourseList(result, null);
+  const scoreListResult = JSON.stringify(scoreList);
+  const userInfoResult = JSON.stringify(userInfo);
+  EducationModule.onGetScoreList(scoreListResult, userInfoResult, null);
 };
 
 const containerStyle: StyleProp<ViewStyle> = {
@@ -76,4 +69,4 @@ const loadingTextStyle: StyleProp<TextStyle> = {
   fontSize: 12,
 };
 
-export default FetchCourseView;
+export default FetchScoreView;

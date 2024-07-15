@@ -68,7 +68,7 @@ function CasMobileLoginView(): React.JSX.Element {
       // source={{
       //   uri: 'https://google.com',
       // }}
-      injectedJavaScript={runFirst}
+      // injectedJavaScript={runFirst}
       style={webviewStyle}
       onMessage={message => {
         const event: {type: string; data: any} = JSON.parse(

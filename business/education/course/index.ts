@@ -5,5 +5,7 @@
  */
 
 import {getCourseList} from './api.ts';
+import {CourseEntity, CourseGridEntity} from './type.ts';
 
 export {getCourseList};
+export type {CourseGridEntity, CourseEntity};
