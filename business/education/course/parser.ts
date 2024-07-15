@@ -22,7 +22,7 @@ const parseResponse = ({
   year: number;
   semester: number;
 }): Map<CourseEntity, CourseGridEntity[]> => {
-  const kbList = json.kbList as Array<{
+  const kbList = json.kbList as {
     kcmc?: string;
     jxbmc?: string;
     xqj?: string;
@@ -33,7 +33,7 @@ const parseResponse = ({
     kcxz?: string;
     xf?: string;
     zcd?: string;
-  }>;
+  }[];
   const result = new Map<CourseEntity, CourseGridEntity[]>();
   for (let data of kbList) {
     const course: CourseEntity = {

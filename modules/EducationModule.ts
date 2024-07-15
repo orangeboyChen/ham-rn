@@ -8,7 +8,11 @@ const {EducationModule} = NativeModules;
  */
 
 export default EducationModule as {
-  onGetCourseList(courseList: any, errorMessage?: string): void;
-  onGetScoreList(): void;
-  getCourseConfig(promise: Promise<{year: number; semester: number}>): void;
+  onGetCourseList(courseList: object, errorMessage: string | null): void;
+  onGetScoreList(
+    scoreList: string,
+    userInfo: string,
+    errorMessage: string | null,
+  ): void;
+  getCourseConfig(): Promise<{year: number; semester: number}>;
 };

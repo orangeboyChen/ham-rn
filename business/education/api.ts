@@ -11,6 +11,7 @@ const loginEducation = async () => {
     service: 'https%3A%2F%2Fjwgl.whu.edu.cn%2Fsso%2Fjznewsixlogin',
   });
   if (res.url.indexOf('index_initMenu.html') === -1) {
+    console.log(res.url);
     const errReason = await parseJsError(res);
     throw Error(`登录失败！${errReason}`);
   }
