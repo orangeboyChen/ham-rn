@@ -10,5 +10,5 @@ const {EducationModule} = NativeModules;
 export default EducationModule as {
   onGetCourseList(courseList: any, errorMessage?: string): void;
   onGetScoreList(): void;
-  getCourseConfig(): Promise<{year: number; semester: number}>;
+  getCourseConfig(promise: Promise<{year: number; semester: number}>): void;
 };
