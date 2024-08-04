@@ -35,7 +35,11 @@ const ScoreCalcViewDescCell = ({
         numberOfLines={2}>
         {item.title}
       </Text>
-      <Text numberOfLines={1}>
+      <Text
+        numberOfLines={1}
+        style={{
+          color: color.ham_text_secondary,
+        }}>
         {item.date} · {item.author}
       </Text>
       <View>
@@ -63,7 +67,7 @@ const ScoreCalcViewDescCell = ({
           {canUpdate ? listItem?.desc : item.desc}
         </Text>
       </View>
-      {descLine > MAX_DESC_LINE && (
+      {descLine > MAX_DESC_LINE - 1 && (
         <Text
           style={[
             {

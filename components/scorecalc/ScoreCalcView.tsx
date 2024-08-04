@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Animated, DeviceEventEmitter} from 'react-native';
+import {View, StyleSheet, Animated, NativeEventEmitter} from 'react-native';
 import ScrollView = Animated.ScrollView;
 import {useColor} from '../../common/color/color.ts';
 import ScoreCalcViewCurrentCard from './component/ScoreCalcViewCurrentCard.tsx';
@@ -32,11 +32,12 @@ const ScoreCalcView = (): React.ReactElement => {
     updateCurrentItem();
   }, []);
   useEffect(() => {
-    DeviceEventEmitter.addListener('onSetScoreJsCalcItem', () => {
+    const eventBus = new NativeEventEmitter(ScoreCalcModule);
+    const listener = eventBus.addListener('onSetScoreJsCalcItem', () => {
       updateCurrentItem();
     });
     return () => {
-      DeviceEventEmitter.removeAllListeners('onSetScoreJsCalcItem');
+      listener.remove();
     };
   }, []);
 

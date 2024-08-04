@@ -111,7 +111,15 @@ const ScoreCalcViewCurrentCard = ({
                 </TouchableOpacity>
               ) : (
                 <View style={styles.operationIcon}>
-                  <Text style={styles.newestText}>最新</Text>
+                  <Text
+                    style={[
+                      {
+                        color: color.ham_text_secondary,
+                      },
+                      styles.newestText,
+                    ]}>
+                    最新
+                  </Text>
                 </View>
               )}
             </View>

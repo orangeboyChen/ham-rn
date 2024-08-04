@@ -27,11 +27,7 @@ const getJsScriptFromGithub = async (url: string): Promise<string> => {
 };
 
 const fetchScoreCalcFromLocal = (): Array<ScoreCalcItem> => {
-  return [
-    HistoryFacultyScoreCalc,
-    HistoryFacultyScoreCalc,
-    HistoryFacultyScoreCalc,
-  ];
+  return [];
 };
 
 export {

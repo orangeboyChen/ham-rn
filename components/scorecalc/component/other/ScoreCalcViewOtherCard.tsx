@@ -93,6 +93,11 @@ const ScoreCalcViewOtherCard = ({
             )}
           </View>
         ))}
+        {calcList.length === 0 && (
+          <Text style={{color: color.ham_text_secondary}}>
+            暂无更多，敬请期待
+          </Text>
+        )}
       </View>
     </Card>
   );

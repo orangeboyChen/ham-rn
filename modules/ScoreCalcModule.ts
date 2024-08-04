@@ -1,4 +1,4 @@
-import {NativeModules} from 'react-native';
+import {NativeModule, NativeModules} from 'react-native';
 import {ScoreCalcItem} from '../business/education/scorecalc/type.ts';
 const {ScoreCalcModule} = NativeModules;
 
@@ -7,9 +7,11 @@ const {ScoreCalcModule} = NativeModules;
  * @version 1.0
  * @date 2024/8/3 16:58
  */
-export default ScoreCalcModule as {
+interface ScoreCalcModuleInterface extends NativeModule {
   getCurrentCalc: () => Promise<string>;
   selectCalc: (item: ScoreCalcItem) => Promise<boolean>;
   openDetail: (item: ScoreCalcItem) => void;
   testItem: (item: ScoreCalcItem) => Promise<boolean>;
-};
+}
+
+export default ScoreCalcModule as ScoreCalcModuleInterface;
