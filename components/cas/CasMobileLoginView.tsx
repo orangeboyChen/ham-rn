@@ -65,11 +65,9 @@ function CasMobileLoginView(): React.JSX.Element {
       source={{
         uri: 'https://cas.whu.edu.cn/authserver/login?service=https%3A%2F%2Fcas.whu.edu.cn%2Fauthserver%2Fmobile%2Fcallback%3FappId%3D985180443&login_type=mobileLogin',
       }}
-      // source={{
-      //   uri: 'https://google.com',
-      // }}
-      // injectedJavaScript={runFirst}
+      injectedJavaScript={runFirst}
       style={webviewStyle}
+      webviewDebuggingEnabled={false}
       onMessage={message => {
         const event: {type: string; data: any} = JSON.parse(
           message.nativeEvent.data,
