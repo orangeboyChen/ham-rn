@@ -47,6 +47,10 @@ const FetchCourseView = (): React.ReactElement => {
 const doGetCourseList = async (captchaToken: string) => {
   await loginEducation();
   const {year, semester} = await EducationModule.getCourseConfig();
+  if (!year || !semester) {
+    throw Error('未设置开学日期');
+  }
+
   const courseListResult = await getCourseList({
     year,
     semester,
