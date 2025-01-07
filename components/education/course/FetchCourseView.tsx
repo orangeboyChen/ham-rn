@@ -51,9 +51,18 @@ const doGetCourseList = async (captchaToken: string) => {
     throw Error('未设置开学日期');
   }
 
+  let requestSemester = semester;
+  if (semester === 1) {
+    requestSemester = 3;
+  } else if (semester === 2) {
+    requestSemester = 12;
+  } else if (semester === 3) {
+    requestSemester = 16;
+  }
+
   const courseListResult = await getCourseList({
-    year,
-    semester,
+    year: year,
+    semester: requestSemester,
     validate: captchaToken,
   });
   const result: any = {};

@@ -13,7 +13,8 @@ const loginEducation = async () => {
   if (res.url.indexOf('index_initMenu.html') === -1) {
     console.log(res.url);
     const errReason = await parseJsError(res);
-    throw Error(`登录失败！${errReason}`);
+    const realReason = errReason.length ? errReason : '试试重新登录信息门户呢~';
+    throw Error(`教务系统登录失败！${realReason}`);
   }
 };
 
