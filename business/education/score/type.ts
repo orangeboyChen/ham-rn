@@ -13,6 +13,7 @@ interface ScoreEntity {
   courseType: string;
   score: number;
   courseCollege: string;
+  isEnabled: true;
 }
 
 interface ScoreRequestUserInfo {
