@@ -18,13 +18,21 @@ const getCourseList = async ({
   validate: string;
   ua?: string;
 }) => {
+  let requestSemester = semester;
+  if (semester === 1) {
+    requestSemester = 3;
+  } else if (semester === 2) {
+    requestSemester = 12;
+  } else if (semester === 3) {
+    requestSemester = 16;
+  }
   const params = new URLSearchParams({
     gnmkdm: funcId,
   });
   const body = new URLSearchParams({
     validate: validate,
     xnm: `${year}`,
-    xqm: `${semester}`,
+    xqm: `${requestSemester}`,
     xzlx: 'ck',
   });
   const response = await fetch(
