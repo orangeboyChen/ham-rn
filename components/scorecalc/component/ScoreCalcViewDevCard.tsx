@@ -15,6 +15,7 @@ const ScoreCalcViewDevCard = ({
 
   const verifyCode = async () => {
     const res = await ScoreCalcModule.testItem({
+      url: '',
       author: '',
       brief: '',
       date: '',

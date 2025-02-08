@@ -19,29 +19,26 @@ import {CaptchaView} from '../CaptchaView.tsx';
 
 const FetchCourseView = (): React.ReactElement => {
   const [captchaToken, setCaptchaToken] = useState('');
-
-  let container;
-  if (captchaToken.length === 0) {
-    container = (
-      <CaptchaView
-        onGetToken={(token: string) => {
-          setCaptchaToken(token);
-          doGetCourseList(token).catch(err => {
-            console.log(err);
-            EducationModule.onGetCourseList({}, err.message);
-          });
-        }}
-      />
-    );
-  } else {
-    container = (
-      <View style={loadingContainerStyle}>
-        <ActivityIndicator size={'large'} />
-        <Text style={loadingTextStyle}>正在加载</Text>
-      </View>
-    );
-  }
-  return <View style={containerStyle}>{container}</View>;
+  return (
+    <View style={containerStyle}>
+      {captchaToken.length === 0 ? (
+        <CaptchaView
+          onGetToken={(token: string) => {
+            setCaptchaToken(token);
+            doGetCourseList(token).catch(err => {
+              console.log(err);
+              EducationModule.onGetCourseList({}, err.message);
+            });
+          }}
+        />
+      ) : (
+        <View style={loadingContainerStyle}>
+          <ActivityIndicator size={'large'} />
+          <Text style={loadingTextStyle}>正在加载</Text>
+        </View>
+      )}
+    </View>
+  );
 };
 
 const doGetCourseList = async (captchaToken: string) => {

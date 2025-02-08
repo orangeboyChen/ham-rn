@@ -19,28 +19,26 @@ import {getScoreList} from '../../../business/education/score';
 
 const FetchScoreView = (): React.ReactElement => {
   const [captchaToken, setCaptchaToken] = useState('');
-  let container;
-  if (captchaToken.length === 0) {
-    container = (
-      <CaptchaView
-        onGetToken={(token: string) => {
-          setCaptchaToken(token);
-          doGetScoreList(token).catch(err => {
-            console.log(err);
-            EducationModule.onGetScoreList('', '', err.message);
-          });
-        }}
-      />
-    );
-  } else {
-    container = (
-      <View style={loadingContainerStyle}>
-        <ActivityIndicator size={'large'} />
-        <Text style={loadingTextStyle}>正在加载</Text>
-      </View>
-    );
-  }
-  return <View style={containerStyle}>{container}</View>;
+  return (
+    <View style={containerStyle}>
+      {captchaToken.length === 0 ? (
+        <CaptchaView
+          onGetToken={(token: string) => {
+            setCaptchaToken(token);
+            doGetScoreList(token).catch(err => {
+              console.log(err);
+              EducationModule.onGetScoreList('', '', err.message);
+            });
+          }}
+        />
+      ) : (
+        <View style={loadingContainerStyle}>
+          <ActivityIndicator size={'large'} />
+          <Text style={loadingTextStyle}>正在加载</Text>
+        </View>
+      )}
+    </View>
+  );
 };
 
 const doGetScoreList = async (captchaToken: string) => {
