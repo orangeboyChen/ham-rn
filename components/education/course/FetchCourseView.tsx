@@ -16,6 +16,7 @@ import {getCourseList} from '../../../business/education/course';
 import EducationModule from '../../../modules/EducationModule.ts';
 import {loginEducation} from '../../../business/education';
 import {CaptchaView} from '../CaptchaView.tsx';
+import Log from '../../../modules/Log.ts';
 
 const FetchCourseView = (): React.ReactElement => {
   const [captchaToken, setCaptchaToken] = useState('');
@@ -26,7 +27,10 @@ const FetchCourseView = (): React.ReactElement => {
           onGetToken={(token: string) => {
             setCaptchaToken(token);
             doGetCourseList(token).catch(err => {
-              console.log(err);
+              Log.e(
+                'FetchCourseView',
+                `doGetCourseList - error! err=${JSON.stringify(err)}`,
+              );
               EducationModule.onGetCourseList({}, err.message);
             });
           }}

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import codePush from 'react-native-code-push';
 import {View} from 'react-native';
+import Log from '../../modules/Log.ts';
 
 /**
  * @author orangeboyChen
@@ -10,7 +11,7 @@ import {View} from 'react-native';
 
 function Common() {
   useEffect(() => {
-    console.log('Common - mounted');
+    Log.i('Common', 'mounted');
   }, []);
   return <View />;
 }

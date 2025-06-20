@@ -4,6 +4,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import CookieManager, {Cookies} from '@react-native-cookies/cookies';
 import {Platform, StyleSheet} from 'react-native';
 import CasMobileLoginModule from '../../modules/CasMobileLoginModule.ts';
+import Log from '../../modules/Log.ts';
 
 /**
  * @author orangeboyChen
@@ -52,10 +53,12 @@ interface UserInfo {
   password?: string;
 }
 
+const TAG = 'CasMobileLoginView';
+
 function CasMobileLoginView(): React.JSX.Element {
   useEffect(() => {
     CookieManager.clearAll(true).then(result => {
-      console.log('clearCookie', result);
+      Log.i(TAG, `clearCookie - ${result}`);
     });
   }, []);
 
@@ -94,7 +97,10 @@ function CasMobileLoginView(): React.JSX.Element {
               userInfo.password ?? '',
               result,
             );
-            console.log(result);
+            Log.i(
+              'CasMobileLoginView',
+              `login cas - ${JSON.stringify(result)}`,
+            );
           }
         };
         if (Platform.OS === 'ios') {

@@ -14,6 +14,7 @@ import {ScoreCalcItem} from '../../../../business/education/scorecalc/type.ts';
 import ScoreCalcModule from '../../../../modules/ScoreCalcModule.ts';
 import CommonModule from '../../../../modules/CommonModule.ts';
 import {getJsScriptFromGithub} from '../../../../business/education/scorecalc/fetch.ts';
+import Log from '../../../../modules/Log.ts';
 
 interface ScoreCalcViewOtherCardParams {
   color: ThemeColor;
@@ -61,7 +62,10 @@ const ScoreCalcViewOtherCard = ({
                 if (item.script === '' && item.url) {
                   try {
                     item.script = await getJsScriptFromGithub(item.url);
-                    console.log(item.script);
+                    Log.i(
+                      'ScoreCalcViewOtherCard',
+                      `onSelect - script=${item.script}`,
+                    );
                   } catch (e: any) {
                     CommonModule.showToast('error', '网络请求遇到了错误', '');
                     return;

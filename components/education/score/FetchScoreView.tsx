@@ -16,6 +16,7 @@ import {CaptchaView} from '../CaptchaView.tsx';
 import EducationModule from '../../../modules/EducationModule.ts';
 import {loginEducation} from '../../../business/education';
 import {getScoreList} from '../../../business/education/score';
+import Log from '../../../modules/Log.ts';
 
 const FetchScoreView = (): React.ReactElement => {
   const [captchaToken, setCaptchaToken] = useState('');
@@ -26,7 +27,10 @@ const FetchScoreView = (): React.ReactElement => {
           onGetToken={(token: string) => {
             setCaptchaToken(token);
             doGetScoreList(token).catch(err => {
-              console.log(err);
+              Log.i(
+                'FetchScoreView',
+                `doGetScoreList - err=${JSON.stringify(err)}`,
+              );
               EducationModule.onGetScoreList('', '', err.message);
             });
           }}

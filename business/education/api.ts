@@ -1,4 +1,5 @@
 import Cas from '../cas';
+import Log from '../../modules/Log.ts';
 
 /**
  * @author orangeboyChen
@@ -11,7 +12,7 @@ const loginEducation = async () => {
     service: 'https%3A%2F%2Fjwgl.whu.edu.cn%2Fsso%2Fjznewsixlogin',
   });
   if (res.url.indexOf('index_initMenu.html') === -1) {
-    console.log(res.url);
+    Log.e('EducationApi', `login education error! res.url=${res.url}`);
     const errReason = await parseJsError(res);
     const realReason = errReason.length ? errReason : '试试重新登录信息门户呢~';
     throw Error(`教务系统登录失败！${realReason}`);
