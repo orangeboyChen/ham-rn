@@ -1,4 +1,5 @@
 import {parseResponse} from './parser.ts';
+import {requestPost} from '../../../common/request/request.ts';
 
 /**
  * @author orangeboyChen
@@ -35,18 +36,11 @@ const getCourseList = async ({
     xqm: `${requestSemester}`,
     xzlx: 'ck',
   });
-  const response = await fetch(
-    `https://jwgl.whu.edu.cn/kbcx/xskbcx_cxXsgrkb.html?${params}`,
-    {
-      method: 'post',
-      body: body.toString(),
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-        'content-type': 'application/x-www-form-urlencoded',
-      },
-    },
-  );
+  const response = await requestPost({
+    url: `https://jwgl.whu.edu.cn/kbcx/xskbcx_cxXsgrkb.html?${params}`,
+    body: body.toString(),
+    contentType: 'application/x-www-form-urlencoded',
+  });
   const rawStr = await response.text();
   const str = rawStr.replaceAll(' ', '');
   const json = JSON.parse(str);

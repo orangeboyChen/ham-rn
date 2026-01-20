@@ -14,7 +14,9 @@ const loginEducation = async () => {
   if (res.url.indexOf('index_initMenu.html') === -1) {
     Log.e('EducationApi', `login education error! res.url=${res.url}`);
     const errReason = await parseJsError(res);
-    const realReason = errReason.length ? errReason : '试试重新登录信息门户呢~';
+    const realReason = errReason.length
+      ? errReason
+      : '试试前往“我的->登录信息门户”重新登录信息门户呢~';
     throw Error(`教务系统登录失败！${realReason}`);
   }
 };

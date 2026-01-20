@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {WebView} from 'react-native-webview';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import CookieManager, {Cookies} from '@react-native-cookies/cookies';
-import {Platform, StyleSheet} from 'react-native';
+import {
+  ColorValue,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 import CasMobileLoginModule from '../../modules/CasMobileLoginModule.ts';
 import Log from '../../modules/Log.ts';
+import {useColor} from '../../common/color/color.ts';
+import Color from 'color';
 
 /**
  * @author orangeboyChen
@@ -69,7 +76,7 @@ function CasMobileLoginView(): React.JSX.Element {
         uri: 'https://cas.whu.edu.cn/authserver/login?service=https%3A%2F%2Fcas.whu.edu.cn%2Fauthserver%2Fmobile%2Fcallback%3FappId%3D985180443&login_type=mobileLogin',
       }}
       injectedJavaScript={runFirst}
-      style={webviewStyle}
+      style={webViewStyle()}
       webviewDebuggingEnabled={false}
       onMessage={message => {
         const event: {type: string; data: any} = JSON.parse(
@@ -127,8 +134,11 @@ function CasMobileLoginView(): React.JSX.Element {
   );
 }
 
-const webviewStyle = StyleSheet.create({
-  backgroundColor: Colors.lighter,
-});
+const webViewStyle = (): ViewStyle => {
+  const color = useColor();
+  return {
+    backgroundColor: color.ham_bg_b1,
+  };
+};
 
 export default CasMobileLoginView;
