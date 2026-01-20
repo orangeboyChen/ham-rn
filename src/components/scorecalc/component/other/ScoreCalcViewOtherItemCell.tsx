@@ -1,0 +1,167 @@
+/**
+ * @author orangeboyChen
+ * @version 1.0
+ * @date 2024/8/3 17:11
+ */
+import React from 'react';
+import {
+  Appearance,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import Color from 'color';
+import type {ThemeColor} from '@/utils/color/color.ts';
+import type {
+  ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
+import {
+  ScoreCalcItemType,
+} from '@/business/education/scorecalc/type.ts';
+
+interface ScoreCalcViewOtherItemCellParams {
+  color: ThemeColor;
+  item: ScoreCalcItem;
+  currentItem: ScoreCalcItem | undefined;
+  goToDetail: () => void;
+  onSelect: () => void;
+}
+
+const ScoreCalcViewOtherItemCell = ({
+  color,
+  item,
+  currentItem,
+  goToDetail,
+  onSelect,
+}: ScoreCalcViewOtherItemCellParams): React.ReactElement => {
+  const isCurrentItem =
+    currentItem?.title === item.title && currentItem?.url === item.url;
+  return (
+    <TouchableWithoutFeedback onPress={goToDetail}>
+      <View style={styles.container}>
+        <View
+          style={[
+            {
+              backgroundColor: Color(color.ham_gray).alpha(0.2).hexa(),
+            },
+            styles.iconContainer,
+          ]}>
+          <Image
+            source={require('@/resources/images/icon_js.png')}
+            style={styles.icon}
+          />
+        </View>
+
+        <View style={styles.textContainer}>
+          <Text
+            style={[
+              {
+                color: color.ham_text_primary,
+              },
+              styles.title,
+            ]}
+            numberOfLines={2}>
+            {item.title}
+          </Text>
+          <View style={styles.briefContainer}>
+            {item.type === ScoreCalcItemType.GITHUB ? (
+              <Image
+                source={
+                  Appearance.getColorScheme() === 'dark'
+                    ? require('@/resources/images/github_light.png')
+                    : require('@/resources/images/github.png')
+                }
+                style={styles.githubIcon}
+              />
+            ) : (
+              <></>
+            )}
+
+            <Text
+              style={[{color: color.ham_text_secondary}, styles.brief]}
+              numberOfLines={1}>
+              {item.brief}
+            </Text>
+          </View>
+        </View>
+
+        {isCurrentItem && currentItem?.version === item.version ? (
+          <Text
+            style={{
+              color: color.ham_text_secondary,
+            }}>
+            当前
+          </Text>
+        ) : (
+          <TouchableOpacity
+            style={styles.selectButtonContainer}
+            onPress={onSelect}>
+            <View
+              style={[
+                {
+                  backgroundColor: Color(color.ham_gray).alpha(0.2).hexa(),
+                },
+                styles.selectButton,
+              ]}>
+              <Text
+                style={{
+                  color: color.ham_blue,
+                }}>
+                {!isCurrentItem ? '选择' : '升级'}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const styles = StyleSheet.create({
+  brief: {
+    flexShrink: 1,
+  },
+  briefContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexShrink: 0,
+    marginTop: 2,
+  },
+  container: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  githubIcon: {
+    height: 16,
+    marginRight: 6,
+    width: 16,
+  },
+  icon: {
+    height: 48,
+    width: 48,
+  },
+  iconContainer: {
+    borderRadius: 12,
+  },
+  selectButton: {
+    alignItems: 'center',
+    borderRadius: 8,
+    paddingHorizontal: 4,
+    paddingVertical: 6,
+  },
+  selectButtonContainer: {
+    width: 46,
+  },
+  textContainer: {
+    flexGrow: 1,
+    flexShrink: 1,
+    marginLeft: 8,
+  },
+  title: {
+    fontSize: 16,
+  },
+});
+
+export default ScoreCalcViewOtherItemCell;
