@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import codePush from 'react-native-code-push';
 import {View} from 'react-native';
 import Log from '@/modules/Log.ts';
+import {HotUpdater} from '@hot-updater/react-native';
 
 /**
  * @author orangeboyChen
@@ -16,9 +16,8 @@ function Common() {
   return <View />;
 }
 
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  installMode: codePush.InstallMode.ON_NEXT_RESUME,
-};
-
-export default codePush(codePushOptions)(Common);
+export default HotUpdater.wrap({
+  baseURL: 'https://react-native-update.ham.obc.zone/api/check-update',
+  updateStrategy: 'appVersion',
+  updateMode: 'auto',
+})(Common);
