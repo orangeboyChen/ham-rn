@@ -18,6 +18,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "color": "^4.2.3",
     "eslint-plugin-react-hooks": "^6.0.0",
+    "jotai": "^2.16.2",
     "react": "18.2.0",
     "react-native": "0.76.9",
     "react-native-md5": "^1.0.0",

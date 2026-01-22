@@ -1,5 +1,6 @@
 import {parseResponse} from './parser.ts';
 import {requestPost} from '@/utils/request/request.ts';
+import Log from '@/modules/Log.ts';
 
 /**
  * @author orangeboyChen
@@ -37,6 +38,7 @@ const getScoreList = async ({
   });
   const rawStr = await response.text();
   const str = rawStr.replaceAll(' ', '');
+  Log.i('getScoreList', `response: ${str}`);
   const json = JSON.parse(str);
   return parseResponse({json});
 };
