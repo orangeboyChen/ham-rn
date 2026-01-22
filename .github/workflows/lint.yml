@@ -19,9 +19,5 @@ jobs:
         with:
           version: 10.6.4
           run_install: true
-      - uses: sibiraj-s/action-eslint@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} # optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
-          annotations: true
+      - name: Run ESLint
+        run: eslint .

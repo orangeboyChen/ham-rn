@@ -1,5 +1,5 @@
 import type {NativeModule} from 'react-native';
-import { NativeModules} from 'react-native';
+import {NativeModules} from 'react-native';
 import type {ScoreCalcItem} from '../business/education/scorecalc/type.ts';
 const {ScoreCalcModule} = NativeModules;
 

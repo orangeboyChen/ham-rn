@@ -15,11 +15,8 @@ import {
 } from 'react-native';
 import Color from 'color';
 import type {ThemeColor} from '@/utils/color/color.ts';
-import type {
-  ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
-import {
-  ScoreCalcItemType,
-} from '@/business/education/scorecalc/type.ts';
+import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
+import {ScoreCalcItemType} from '@/business/education/scorecalc/type.ts';
 
 interface ScoreCalcViewOtherItemCellParams {
   color: ThemeColor;

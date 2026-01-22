@@ -1,6 +1,6 @@
 import React from 'react';
 import type {StyleProp, ViewStyle} from 'react-native';
-import { StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useColor} from '@/utils/color/color.ts';
 import type {
   NativeSyntheticEvent,

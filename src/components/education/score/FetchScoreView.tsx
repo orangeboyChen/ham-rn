@@ -4,15 +4,8 @@
  * @date 2024/7/16 00:39
  */
 import React, {useState} from 'react';
-import type {
-  StyleProp,
-  TextStyle,
-  ViewStyle} from 'react-native';
-import {
-  ActivityIndicator,
-  Text,
-  View
-} from 'react-native';
+import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {ActivityIndicator, Text, View} from 'react-native';
 import {CaptchaView} from '../CaptchaView.tsx';
 import EducationModule from '@/modules/EducationModule.ts';
 import {loginEducation} from '@/business/education';

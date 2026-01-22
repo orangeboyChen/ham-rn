@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const html =
   '<!DOCTYPE html>\n' +
   '<!-- saved from url=(0014)about:internet -->\n' +
@@ -151,14 +152,14 @@ export const html =
   '\n' +
   '</div>\n' +
   '<script>\n' +
-  '\t\t\tvar myCaptcha = _dx.Captcha(document.getElementById(\'div1\'), {\n' +
-  '            style: \'embed\',\n' +
-  '            appId: \'97f21767358533b1992e4099a4c3bae6\', //appId，在控制台中“应用管理”或“应用配置”模块获取\n' +
-  '            apiServer: \'https://dxvip.dingxiang-inc.com\', // 请填写这个配置，按照下面“接入域名”所示!注意：末尾不要有斜杆！\n' +
+  "\t\t\tvar myCaptcha = _dx.Captcha(document.getElementById('div1'), {\n" +
+  "            style: 'embed',\n" +
+  "            appId: '97f21767358533b1992e4099a4c3bae6', //appId，在控制台中“应用管理”或“应用配置”模块获取\n" +
+  "            apiServer: 'https://dxvip.dingxiang-inc.com', // 请填写这个配置，按照下面“接入域名”所示!注意：末尾不要有斜杆！\n" +
   '            success: function (token) {\n' +
-  '                console.log(\'token:\', token)\n' +
+  "                console.log('token:', token)\n" +
   '                var message = {\n' +
-  '                    \'token\': token\n' +
+  "                    'token': token\n" +
   '                }\n' +
   '                window.ReactNativeWebView.postMessage(JSON.stringify(message))\n' +
   '            }\n' +
