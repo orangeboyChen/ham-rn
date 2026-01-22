@@ -37,12 +37,15 @@ const parseResponse = ({
   };
   let result: ScoreEntity[] = [];
   for (let item of items) {
-    userInfo = {
-      college: item.jgmc ?? '',
-      major: item.zymc ?? '',
-      name: item.xm ?? '',
-      studentId: item.xh ?? '',
-    };
+    if (item.xh !== '') {
+      userInfo = {
+        college: item.jgmc ?? '',
+        major: item.zymc ?? '',
+        name: item.xm ?? '',
+        studentId: item.xh ?? '',
+      };
+    }
+
     const entity: ScoreEntity = {
       year: parseInt(item.xnm ?? '', 10),
       name: item.kcmc ?? '',

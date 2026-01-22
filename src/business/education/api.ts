@@ -28,4 +28,12 @@ const parseJsError = async (response: Response): Promise<string> => {
   return match ? match[0].replace('var dlktsxx="', '').replace('";', '') : '';
 };
 
-export {loginEducation};
+const generateValidate = () => {
+  return (
+    'sl' +
+    Math.floor(Math.random() * 1e10).toString(36) +
+    Date.now().toString(36)
+  );
+};
+
+export {loginEducation, generateValidate};

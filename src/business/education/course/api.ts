@@ -1,5 +1,6 @@
 import {parseResponse} from './parser.ts';
 import {requestPost} from '@/utils/request/request.ts';
+import Log from '@/modules/Log.ts';
 
 /**
  * @author orangeboyChen
@@ -11,7 +12,7 @@ const getCourseList = async ({
   year,
   semester,
   funcId = 'N2151',
-  validate,
+  validate = '',
 }: {
   year: number;
   semester: number;
@@ -43,6 +44,7 @@ const getCourseList = async ({
   });
   const rawStr = await response.text();
   const str = rawStr.replaceAll(' ', '');
+  Log.i('getCourseList', `response: ${str}`);
   const json = JSON.parse(str);
   return parseResponse({
     json,

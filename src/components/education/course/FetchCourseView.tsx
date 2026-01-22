@@ -3,43 +3,36 @@
  * @version 1.0
  * @date 2024/7/15 18:17
  */
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {getCourseList} from '@/business/education/course';
 import EducationModule from '@/modules/EducationModule.ts';
 import {loginEducation} from '@/business/education';
-import {CaptchaView} from '../CaptchaView.tsx';
 import Log from '@/modules/Log.ts';
+import {generateValidate} from '@/business/education/api.ts';
 
 const FetchCourseView = (): React.ReactElement => {
-  const [captchaToken, setCaptchaToken] = useState('');
+  useEffect(() => {
+    doGetCourseList().catch(err => {
+      Log.e(
+        'FetchCourseView',
+        `doGetCourseList - error! err=${JSON.stringify(err)}`,
+      );
+      EducationModule.onGetCourseList({}, err.message);
+    });
+  }, []);
   return (
     <View style={containerStyle}>
-      {captchaToken.length === 0 ? (
-        <CaptchaView
-          onGetToken={(token: string) => {
-            setCaptchaToken(token);
-            doGetCourseList(token).catch(err => {
-              Log.e(
-                'FetchCourseView',
-                `doGetCourseList - error! err=${JSON.stringify(err)}`,
-              );
-              EducationModule.onGetCourseList({}, err.message);
-            });
-          }}
-        />
-      ) : (
-        <View style={loadingContainerStyle}>
-          <ActivityIndicator size={'large'} />
-          <Text style={loadingTextStyle}>正在加载</Text>
-        </View>
-      )}
+      <View style={loadingContainerStyle}>
+        <ActivityIndicator size={'large'} />
+        <Text style={loadingTextStyle}>正在加载</Text>
+      </View>
     </View>
   );
 };
 
-const doGetCourseList = async (captchaToken: string) => {
+const doGetCourseList = async () => {
   await loginEducation();
   const {year, semester} = await EducationModule.getCourseConfig();
   if (!year || !semester) {
@@ -49,7 +42,7 @@ const doGetCourseList = async (captchaToken: string) => {
   const courseListResult = await getCourseList({
     year: year,
     semester: semester,
-    validate: captchaToken,
+    validate: generateValidate(),
   });
   const result: Record<string, string> = {};
   for (let entry of courseListResult.entries()) {
