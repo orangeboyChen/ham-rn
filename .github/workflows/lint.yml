@@ -20,4 +20,4 @@ jobs:
           version: 10.6.4
           run_install: true
       - name: Run ESLint
-        run: eslint .
+        run: pnpm lint
