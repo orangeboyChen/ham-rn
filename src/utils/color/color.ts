@@ -3,7 +3,7 @@
  * @version 1.0
  * @date 2024/8/3 14:37
  */
-import type { ColorValue} from 'react-native';
+import type {ColorValue} from 'react-native';
 import {Appearance} from 'react-native';
 import {useEffect, useState} from 'react';
 import AppearanceListener = Appearance.AppearanceListener;

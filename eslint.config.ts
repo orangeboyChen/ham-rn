@@ -2,12 +2,10 @@ import {defineConfig} from 'eslint/config';
 import {fixupPluginRules} from '@eslint/compat';
 import reactNative from 'eslint-plugin-react-native';
 import tseslint from 'typescript-eslint';
-
-const reactNativeGlobals =
-  reactNative.environments?.['react-native']?.globals ?? {};
-const reactNativeAllRules = reactNative.configs?.all?.rules ?? {};
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default defineConfig([
+  eslintPluginPrettierRecommended,
   {
     plugins: {
       '@typescript-eslint': tseslint.plugin,
@@ -21,15 +19,16 @@ export default defineConfig([
           jsx: true,
         },
       },
-      globals: reactNativeGlobals,
     },
     rules: {
-      ...reactNativeAllRules,
+      'no-console': ['error'],
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
-      'react-native/no-inline-styles': 'off',
-      'react-native/no-color-literals': 'off',
+      'react-native/no-color-literals': 2,
+      'react-native/no-unused-styles': 2,
+      'react-native/no-raw-text': 2,
+      'react-native/sort-styles': 2,
       quotes: ['error', 'single'],
     },
   },

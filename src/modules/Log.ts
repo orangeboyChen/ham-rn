@@ -4,7 +4,7 @@
  * @date 2025/6/20 18:54
  */
 import type {NativeModule} from 'react-native';
-import { NativeModules} from 'react-native';
+import {NativeModules} from 'react-native';
 const {LogModule} = NativeModules;
 
 interface LogModuleInterface extends NativeModule {

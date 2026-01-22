@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import type {DimensionValue} from 'react-native';
-import { View} from 'react-native';
+import {View} from 'react-native';
 import {useColor} from '../color/color.ts';
 
 const Card = ({
