@@ -11,6 +11,7 @@ import {loginEducation} from '@/business/education';
 import {getScoreList} from '@/business/education/score';
 import Log from '@/modules/Log.ts';
 import {generateValidate} from '@/business/education/api.ts';
+import {getUserInfo} from '@/business/education/score/api.ts';
 
 const FetchScoreView = (): React.ReactElement => {
   useEffect(() => {
@@ -34,6 +35,10 @@ const doGetScoreList = async () => {
   const [scoreList, userInfo] = await getScoreList({
     validate: generateValidate(),
   });
+  if (userInfo.studentId === '') {
+    let {studentID} = await getUserInfo();
+    userInfo.studentId = studentID;
+  }
   const scoreListResult = JSON.stringify(scoreList);
   const userInfoResult = JSON.stringify(userInfo);
   EducationModule.onGetScoreList(scoreListResult, userInfoResult, null);
