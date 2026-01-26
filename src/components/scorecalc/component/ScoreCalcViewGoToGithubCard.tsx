@@ -1,9 +1,11 @@
 import {Appearance, Image, Text, TouchableOpacity, View} from 'react-native';
 import Card from '@/utils/ui/Card.tsx';
 import React from 'react';
+import '@/i18n/i18n';
 import type {ThemeColor} from '@/utils/color/color.ts';
 import {StyleSheet} from 'react-native';
 import CommonModule from '@/modules/CommonModule.ts';
+import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewGoToGithubCardParams {
   color: ThemeColor;
@@ -14,6 +16,7 @@ const ScoreCalcViewGoToGithubCard = ({
   color,
   showDevMode,
 }: ScoreCalcViewGoToGithubCardParams) => {
+  const {t} = useTranslation();
   return (
     <TouchableOpacity
       onPress={() => {
@@ -40,9 +43,11 @@ const ScoreCalcViewGoToGithubCard = ({
                 },
                 styles.title,
               ]}>
-              开发成绩计算方式
+              {t('scorecalc.github.title')}
             </Text>
-            <Text style={{color: color.ham_text_secondary}}>去Github提PR</Text>
+            <Text style={{color: color.ham_text_secondary}}>
+              {t('scorecalc.github.subtitle')}
+            </Text>
           </View>
           <View style={styles.grow} />
           <Image

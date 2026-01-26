@@ -5,6 +5,7 @@
  */
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import '@/i18n/i18n';
 import type {ThemeColor} from '@/utils/color/color.ts';
 import ScoreCalcViewDescCell from './ScoreCalcViewDescCell.tsx';
 import {StyleSheet} from 'react-native';
@@ -14,6 +15,7 @@ import Color from 'color';
 import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
 import CommonModule from '@/modules/CommonModule.ts';
 import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch.ts';
+import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewCurrentCardParams {
   color: ThemeColor;
@@ -45,6 +47,7 @@ const ScoreCalcViewCurrentCard = ({
   listItem,
   onSetItem,
 }: ScoreCalcViewCurrentCardParams): React.ReactElement => {
+  const {t} = useTranslation();
   const doUpdate = async () => {
     if (!listItem) {
       return;
@@ -53,16 +56,20 @@ const ScoreCalcViewCurrentCard = ({
       try {
         listItem.script = await getJsScriptFromGithub(listItem.url);
       } catch {
-        CommonModule.showToast('error', '网络请求遇到了错误', '');
+        CommonModule.showToast('error', t('common.network_error'), '');
         return;
       }
     }
     const res = await ScoreCalcModule.selectCalc(listItem);
     if (!res) {
-      CommonModule.showToast('error', '脚本未通过校验', '请联系脚本作者');
+      CommonModule.showToast(
+        'error',
+        t('common.script_invalid'),
+        t('common.contact_author'),
+      );
       return;
     }
-    CommonModule.showToast('success', '已升级', '');
+    CommonModule.showToast('success', t('scorecalc.current.upgraded'), '');
     onSetItem();
   };
 
@@ -77,7 +84,7 @@ const ScoreCalcViewCurrentCard = ({
             },
             styles.title,
           ]}>
-          正在使用
+          {t('scorecalc.current.title')}
         </Text>
         {item ? (
           <View>
@@ -105,7 +112,7 @@ const ScoreCalcViewCurrentCard = ({
                       style={{
                         color: color.ham_blue,
                       }}>
-                      升级
+                      {t('scorecalc.current.update')}
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -118,7 +125,7 @@ const ScoreCalcViewCurrentCard = ({
                       },
                       styles.newestText,
                     ]}>
-                    最新
+                    {t('scorecalc.current.latest')}
                   </Text>
                 </View>
               )}
@@ -126,7 +133,9 @@ const ScoreCalcViewCurrentCard = ({
           </View>
         ) : (
           <View>
-            <Text style={{color: color.ham_text_secondary}}>未选择</Text>
+            <Text style={{color: color.ham_text_secondary}}>
+              {t('scorecalc.current.none')}
+            </Text>
           </View>
         )}
       </View>

@@ -11,7 +11,23 @@ import {HotUpdater} from '@hot-updater/react-native';
 
 function Common() {
   useEffect(() => {
+    const unsubscribe = HotUpdater.addListener('onProgress', ({progress}) => {
+      Log.i('Common', `HotUpdater => onProgress: ${progress}%`);
+    });
     Log.i('Common', 'mounted');
+    Log.i('Common', `HotUpdater => Channel: ${HotUpdater.getChannel()}`);
+    Log.i('Common', `HotUpdater => AppVersion: ${HotUpdater.getAppVersion()}`);
+    Log.i(
+      'Common',
+      `HotUpdater => isUpdateDownloaded: ${HotUpdater.isUpdateDownloaded()}`,
+    );
+    Log.i(
+      'Common',
+      `HotUpdater => FingerprintHash: ${HotUpdater.getFingerprintHash()}`,
+    );
+    return () => {
+      unsubscribe();
+    };
   }, []);
   return <View />;
 }

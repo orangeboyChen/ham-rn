@@ -4,6 +4,7 @@
  * @date 2024/8/3 17:11
  */
 import React from 'react';
+import '@/i18n/i18n';
 import {
   Appearance,
   Image,
@@ -17,6 +18,7 @@ import Color from 'color';
 import type {ThemeColor} from '@/utils/color/color.ts';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
 import {ScoreCalcItemType} from '@/business/education/scorecalc/type.ts';
+import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewOtherItemCellParams {
   color: ThemeColor;
@@ -33,6 +35,7 @@ const ScoreCalcViewOtherItemCell = ({
   goToDetail,
   onSelect,
 }: ScoreCalcViewOtherItemCellParams): React.ReactElement => {
+  const {t} = useTranslation();
   const isCurrentItem =
     currentItem?.title === item.title && currentItem?.url === item.url;
   return (
@@ -89,7 +92,7 @@ const ScoreCalcViewOtherItemCell = ({
             style={{
               color: color.ham_text_secondary,
             }}>
-            当前
+            {t('scorecalc.item.current')}
           </Text>
         ) : (
           <TouchableOpacity
@@ -106,7 +109,9 @@ const ScoreCalcViewOtherItemCell = ({
                 style={{
                   color: color.ham_blue,
                 }}>
-                {!isCurrentItem ? '选择' : '升级'}
+                {!isCurrentItem
+                  ? t('scorecalc.item.select')
+                  : t('scorecalc.item.upgrade')}
               </Text>
             </View>
           </TouchableOpacity>

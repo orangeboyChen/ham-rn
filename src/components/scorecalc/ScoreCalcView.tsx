@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Animated, NativeEventEmitter} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Animated,
+  NativeEventEmitter,
+  Platform,
+  Text,
+} from 'react-native';
 import ScrollView = Animated.ScrollView;
 import {useColor} from '@/utils/color/color.ts';
 import ScoreCalcViewCurrentCard from './component/ScoreCalcViewCurrentCard.tsx';
@@ -12,6 +19,10 @@ import {
   fetchScoreCalcFromGithub,
   fetchScoreCalcFromLocal,
 } from '@/business/education/scorecalc/fetch.ts';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 /**
  * @author orangeboyChen
@@ -19,6 +30,14 @@ import {
  * @date 2024/7/27 21:18
  */
 const ScoreCalcView = (): React.ReactElement => {
+  return (
+    <SafeAreaProvider>
+      <ScoreCalcViewContent />
+    </SafeAreaProvider>
+  );
+};
+
+const ScoreCalcViewContent = () => {
   const [currentItem, setCurrentItem] = useState<ScoreCalcItem>();
   const color = useColor();
 
@@ -61,13 +80,14 @@ const ScoreCalcView = (): React.ReactElement => {
       setCalcList([...localItem, ...githubItem]);
     } catch {}
   };
-
+  const insets = useSafeAreaInsets();
   return (
     <ScrollView
       style={{
         backgroundColor: color.ham_bg_b1,
         ...styles.container,
       }}>
+      <View style={{paddingTop: Platform.OS === 'ios' ? insets.top : 0}} />
       <View style={styles.topPadding} />
       <ScoreCalcViewCurrentCard
         color={color}

@@ -4,6 +4,7 @@
  * @date 2024/7/15 18:17
  */
 import React, {useEffect} from 'react';
+import '@/i18n/i18n';
 import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {getCourseList} from '@/business/education/course';
@@ -11,8 +12,11 @@ import EducationModule from '@/modules/EducationModule.ts';
 import {loginEducation} from '@/business/education';
 import Log from '@/modules/Log.ts';
 import {generateValidate} from '@/business/education/api.ts';
+import {useTranslation} from 'react-i18next';
+import i18n from '@/i18n/i18n';
 
 const FetchCourseView = (): React.ReactElement => {
+  const {t} = useTranslation();
   useEffect(() => {
     doGetCourseList().catch(err => {
       Log.e(
@@ -26,7 +30,7 @@ const FetchCourseView = (): React.ReactElement => {
     <View style={containerStyle}>
       <View style={loadingContainerStyle}>
         <ActivityIndicator size={'large'} />
-        <Text style={loadingTextStyle}>正在加载</Text>
+        <Text style={loadingTextStyle}>{t('education.loading')}</Text>
       </View>
     </View>
   );
@@ -36,7 +40,7 @@ const doGetCourseList = async () => {
   await loginEducation();
   const {year, semester} = await EducationModule.getCourseConfig();
   if (!year || !semester) {
-    throw Error('未设置开学日期');
+    throw Error(i18n.t('education.semester_not_set'));
   }
 
   const courseListResult = await getCourseList({

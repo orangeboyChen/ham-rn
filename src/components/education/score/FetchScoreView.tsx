@@ -4,6 +4,7 @@
  * @date 2024/7/16 00:39
  */
 import React, {useEffect} from 'react';
+import '@/i18n/i18n';
 import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {ActivityIndicator, Text, View} from 'react-native';
 import EducationModule from '@/modules/EducationModule.ts';
@@ -11,9 +12,11 @@ import {loginEducation} from '@/business/education';
 import {getScoreList} from '@/business/education/score';
 import Log from '@/modules/Log.ts';
 import {generateValidate} from '@/business/education/api.ts';
+import {useTranslation} from 'react-i18next';
 import {getUserInfo} from '@/business/education/score/api.ts';
 
 const FetchScoreView = (): React.ReactElement => {
+  const {t} = useTranslation();
   useEffect(() => {
     doGetScoreList().catch(err => {
       Log.i('FetchScoreView', `doGetScoreList - err=${JSON.stringify(err)}`);
@@ -24,7 +27,7 @@ const FetchScoreView = (): React.ReactElement => {
     <View style={containerStyle}>
       <View style={loadingContainerStyle}>
         <ActivityIndicator size={'large'} />
-        <Text style={loadingTextStyle}>正在加载</Text>
+        <Text style={loadingTextStyle}>{t('education.loading')}</Text>
       </View>
     </View>
   );
