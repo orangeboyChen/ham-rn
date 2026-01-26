@@ -30,14 +30,33 @@ import {
  * @date 2024/7/27 21:18
  */
 const ScoreCalcView = (): React.ReactElement => {
-  return (
-    <SafeAreaProvider>
-      <ScoreCalcViewContent />
-    </SafeAreaProvider>
-  );
+  if (Platform.OS === 'ios') {
+    return (
+      <SafeAreaProvider>
+        <IOSInsetView>
+          {({paddingTop}) => (
+            <>
+              <ScoreCalcViewContent paddingTop={paddingTop} />
+            </>
+          )}
+        </IOSInsetView>
+      </SafeAreaProvider>
+    );
+  } else {
+    return <ScoreCalcViewContent paddingTop={0} />;
+  }
 };
 
-const ScoreCalcViewContent = () => {
+const IOSInsetView = ({
+  children,
+}: {
+  children: ({paddingTop}: {paddingTop: number}) => React.ReactNode;
+}) => {
+  const insets = useSafeAreaInsets();
+  return children({paddingTop: insets.top});
+};
+
+const ScoreCalcViewContent = ({paddingTop}: {paddingTop: number}) => {
   const [currentItem, setCurrentItem] = useState<ScoreCalcItem>();
   const color = useColor();
 
@@ -80,14 +99,13 @@ const ScoreCalcViewContent = () => {
       setCalcList([...localItem, ...githubItem]);
     } catch {}
   };
-  const insets = useSafeAreaInsets();
   return (
     <ScrollView
       style={{
         backgroundColor: color.ham_bg_b1,
         ...styles.container,
       }}>
-      <View style={{paddingTop: Platform.OS === 'ios' ? insets.top : 0}} />
+      <View style={{paddingTop}} />
       <View style={styles.topPadding} />
       <ScoreCalcViewCurrentCard
         color={color}
