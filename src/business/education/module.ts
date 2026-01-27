@@ -7,6 +7,7 @@ import type {
   ScoreEntity,
   ScoreRequestUserInfo,
 } from '@/business/education/score/type.ts';
+import {getUserInfo} from '@/business/education/score/api.ts';
 
 /**
  * @author orangeboyChen
@@ -68,6 +69,10 @@ const updateScoreList = async () => {
     [scoreList, userInfo] = await getScoreList({
       validate: generateValidate(),
     });
+    if (userInfo.studentId === '') {
+      let {studentID} = await getUserInfo();
+      userInfo.studentId = studentID;
+    }
   } catch (e: unknown) {
     if (e instanceof Error) {
       EducationModule.onGetCourseList([], `获取成绩失败! ${e.message}`);
