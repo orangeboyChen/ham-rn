@@ -5,7 +5,6 @@ import {
   Animated,
   NativeEventEmitter,
   Platform,
-  Text,
 } from 'react-native';
 import ScrollView = Animated.ScrollView;
 import {useColor} from '@/utils/color/color.ts';

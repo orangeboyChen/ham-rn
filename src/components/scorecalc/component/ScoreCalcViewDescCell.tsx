@@ -81,7 +81,9 @@ const ScoreCalcViewDescCell = ({
             styles.more,
           ]}
           onPress={() => setShowFullDesc(!showFullDesc)}>
-          {showFullDesc ? t('scorecalc.desc.collapse') : t('scorecalc.desc.more')}
+          {showFullDesc
+            ? t('scorecalc.desc.collapse')
+            : t('scorecalc.desc.more')}
         </Text>
       )}
     </View>
