@@ -1,7 +1,16 @@
 {
   "cas": {
     "invalid_student_id": "Please enter a valid student ID",
-    "student_id_placeholder": "Student ID"
+    "student_id_placeholder": "Student ID",
+    "password_placeholder": "Password",
+    "login_button": "Login",
+    "remember_me": "Remember me",
+    "agree_prefix": "I have read and agree to Zhihui Luojia",
+    "privacy_policy": "Privacy Policy",
+    "university_name": "Wuhan University",
+    "privacy_agreement_tip": "Please read and agree to the Privacy Policy first!",
+    "account_expired_tip": "This account has expired",
+    "invalid_username_or_password_tip": "The username or password you provided is incorrect"
   },
   "common": {
     "contact_author": "Please contact the script author",

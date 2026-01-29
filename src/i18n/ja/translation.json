@@ -1,7 +1,16 @@
 {
   "cas": {
     "invalid_student_id": "正しい学籍番号を入力してください",
-    "student_id_placeholder": "学籍番号"
+    "student_id_placeholder": "学籍番号",
+    "password_placeholder": "パスワード",
+    "login_button": "ログイン",
+    "remember_me": "ログイン状態を保持",
+    "agree_prefix": "智慧珞珈を読み、同意しました",
+    "privacy_policy": "プライバシーポリシー",
+    "university_name": "武漢大学",
+    "privacy_agreement_tip": "プライバシーポリシーを先にお読みの上、同意してください！",
+    "account_expired_tip": "このアカウントは期限切れです",
+    "invalid_username_or_password_tip": "ユーザー名またはパスワードが正しくありません"
   },
   "common": {
     "contact_author": "スクリプトの作者に連絡してください",

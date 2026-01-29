@@ -21,20 +21,21 @@ const resources: Resource = {
 };
 
 let inited = false;
+i18n.use(initReactI18next).init({
+  resources,
+  fallbackLng: 'zh',
+  lng: 'zh',
+  supportedLngs: ['zh', 'en', 'ja'],
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export async function initI18n() {
-  if (inited) return i18n;
+  if (inited) return;
   const doInit = async () => {
     const locale = await CommonModule.getLocale();
-    await i18n.use(initReactI18next).init({
-      resources,
-      fallbackLng: 'zh',
-      lng: locale,
-      supportedLngs: ['zh', 'en', 'ja'],
-      interpolation: {
-        escapeValue: false,
-      },
-    });
+    await i18n.changeLanguage(locale);
   };
 
   await doInit();
@@ -44,9 +45,7 @@ export async function initI18n() {
     const locale = await CommonModule.getLocale();
     await i18n.changeLanguage(locale);
   });
-
   inited = true;
-  return i18n;
 }
 initI18n().then();
 

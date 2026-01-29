@@ -1,7 +1,16 @@
 {
   "cas": {
     "invalid_student_id": "请输入正确的学号",
-    "student_id_placeholder": "学号"
+    "student_id_placeholder": "学号",
+    "password_placeholder": "密码",
+    "login_button": "登录",
+    "remember_me": "近期免登录",
+    "agree_prefix": "我已阅读并同意智慧珞珈",
+    "privacy_policy": "《隐私协议》",
+    "university_name": "武汉大学",
+    "privacy_agreement_tip": "请先阅读并同意隐私协议!",
+    "account_expired_tip": "该帐号已经过期",
+    "invalid_username_or_password_tip": "您提供的用户名或者密码有误"
   },
   "common": {
     "contact_author": "请联系脚本作者",
