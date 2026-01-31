@@ -77,3 +77,4 @@ yarn.lock
 .env.hotupdater
 # hot-updater
 .hot-updater/output
+dist

@@ -1,0 +1,64 @@
+{
+  "cas": {
+    "invalid_student_id": "请输入正确的学号",
+    "student_id_placeholder": "学号",
+    "password_placeholder": "密码",
+    "login_button": "登录",
+    "remember_me": "近期免登录",
+    "agree_prefix": "我已阅读并同意智慧珞珈",
+    "privacy_policy": "《隐私协议》",
+    "university_name": "武汉大学",
+    "privacy_agreement_tip": "请先阅读并同意隐私协议!",
+    "account_expired_tip": "该帐号已经过期",
+    "invalid_username_or_password_tip": "您提供的用户名或者密码有误"
+  },
+  "common": {
+    "contact_author": "请联系脚本作者",
+    "network_error": "网络请求遇到了错误",
+    "script_invalid": "脚本未通过校验",
+    "selected": "已选择"
+  },
+  "education": {
+    "course_fetch_failed_with_reason": "获取课程失败! {{reason}}",
+    "loading": "正在加载",
+    "login_failed_full": "教务系统登录失败! {{reason}}",
+    "login_failed_reason": "试试前往“我的->登录信息门户”重新登录信息门户呢~",
+    "score_fetch_failed_with_reason": "获取成绩失败! {{reason}}",
+    "semester_not_set": "未设置开学日期"
+  },
+  "scorecalc": {
+    "current": {
+      "latest": "最新",
+      "none": "未选择",
+      "title": "正在使用",
+      "update": "升级",
+      "upgraded": "已升级"
+    },
+    "desc": {
+      "collapse": "收起",
+      "more": "更多...",
+      "update_log": "【更新日志】"
+    },
+    "dev": {
+      "done": "完成",
+      "placeholder": "粘贴你的代码",
+      "title": "开发调试",
+      "verify_failed": "验证失败",
+      "verify_failed_detail": "请检查代码中是否存在语法错误",
+      "verify_success": "验证通过"
+    },
+    "github": {
+      "subtitle": "去Github提PR",
+      "title": "开发成绩计算方式"
+    },
+    "item": {
+      "current": "当前",
+      "select": "选择",
+      "upgrade": "升级"
+    },
+    "other": {
+      "empty": "暂无更多，敬请期待",
+      "title": "选择其它计算方式"
+    }
+  }
+}

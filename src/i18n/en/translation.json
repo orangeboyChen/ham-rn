@@ -1,0 +1,64 @@
+{
+  "cas": {
+    "invalid_student_id": "Please enter a valid student ID",
+    "student_id_placeholder": "Student ID",
+    "password_placeholder": "Password",
+    "login_button": "Login",
+    "remember_me": "Remember me",
+    "agree_prefix": "I have read and agree to Zhihui Luojia",
+    "privacy_policy": "Privacy Policy",
+    "university_name": "Wuhan University",
+    "privacy_agreement_tip": "Please read and agree to the Privacy Policy first!",
+    "account_expired_tip": "This account has expired",
+    "invalid_username_or_password_tip": "The username or password you provided is incorrect"
+  },
+  "common": {
+    "contact_author": "Please contact the script author",
+    "network_error": "Network request failed",
+    "script_invalid": "Script verification failed",
+    "selected": "Selected"
+  },
+  "education": {
+    "course_fetch_failed_with_reason": "Failed to fetch courses! {{reason}}",
+    "loading": "Loading",
+    "login_failed_full": "Education system login failed! {{reason}}",
+    "login_failed_reason": "Try re-logging in via \"Me -> Portal Login\".",
+    "score_fetch_failed_with_reason": "Failed to fetch scores! {{reason}}",
+    "semester_not_set": "Semester start date not set"
+  },
+  "scorecalc": {
+    "current": {
+      "latest": "Latest",
+      "none": "Not selected",
+      "title": "In use",
+      "update": "Update",
+      "upgraded": "Updated"
+    },
+    "desc": {
+      "collapse": "Collapse",
+      "more": "More...",
+      "update_log": "[Changelog]"
+    },
+    "dev": {
+      "done": "Done",
+      "placeholder": "Paste your code",
+      "title": "Developer Debug",
+      "verify_failed": "Verification failed",
+      "verify_failed_detail": "Check your code for syntax errors",
+      "verify_success": "Verification passed"
+    },
+    "github": {
+      "subtitle": "Open a PR on GitHub",
+      "title": "Develop score calculators"
+    },
+    "item": {
+      "current": "Current",
+      "select": "Select",
+      "upgrade": "Update"
+    },
+    "other": {
+      "empty": "No more yet, stay tuned",
+      "title": "Choose another method"
+    }
+  }
+}

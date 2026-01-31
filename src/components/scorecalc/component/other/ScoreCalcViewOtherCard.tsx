@@ -4,6 +4,7 @@
  * @date 2024/8/3 17:25
  */
 import React from 'react';
+import '@/i18n/i18n';
 import {Text, View} from 'react-native';
 import Color from 'color';
 import Card from '@/utils/ui/Card.tsx';
@@ -15,6 +16,7 @@ import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
 import CommonModule from '@/modules/CommonModule.ts';
 import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch.ts';
 import Log from '@/modules/Log.ts';
+import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewOtherCardParams {
   color: ThemeColor;
@@ -29,6 +31,7 @@ const ScoreCalcViewOtherCard = ({
   currentItem,
   onSetItem,
 }: ScoreCalcViewOtherCardParams): React.ReactElement => {
+  const {t} = useTranslation();
   return (
     <Card>
       <View>
@@ -39,7 +42,7 @@ const ScoreCalcViewOtherCard = ({
             },
             styles.title,
           ]}>
-          选择其它计算方式
+          {t('scorecalc.other.title')}
         </Text>
         {calcList.map((item, index) => (
           <View key={item.title + item.url + index}>
@@ -52,7 +55,11 @@ const ScoreCalcViewOtherCard = ({
                   try {
                     item.script = await getJsScriptFromGithub(item.url);
                   } catch {
-                    CommonModule.showToast('error', '网络请求遇到了错误', '');
+                    CommonModule.showToast(
+                      'error',
+                      t('common.network_error'),
+                      '',
+                    );
                     return;
                   }
                 }
@@ -67,7 +74,11 @@ const ScoreCalcViewOtherCard = ({
                       `onSelect - script=${item.script}`,
                     );
                   } catch {
-                    CommonModule.showToast('error', '网络请求遇到了错误', '');
+                    CommonModule.showToast(
+                      'error',
+                      t('common.network_error'),
+                      '',
+                    );
                     return;
                   }
                 }
@@ -75,13 +86,13 @@ const ScoreCalcViewOtherCard = ({
                 if (!res) {
                   CommonModule.showToast(
                     'error',
-                    '脚本未通过校验',
-                    '请联系脚本作者',
+                    t('common.script_invalid'),
+                    t('common.contact_author'),
                   );
                   return;
                 }
 
-                CommonModule.showToast('success', '已选择', '');
+                CommonModule.showToast('success', t('common.selected'), '');
                 onSetItem();
               }}
             />
@@ -99,7 +110,7 @@ const ScoreCalcViewOtherCard = ({
         ))}
         {calcList.length === 0 && (
           <Text style={{color: color.ham_text_secondary}}>
-            暂无更多，敬请期待
+            {t('scorecalc.other.empty')}
           </Text>
         )}
       </View>

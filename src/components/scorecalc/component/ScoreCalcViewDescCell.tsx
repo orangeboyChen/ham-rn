@@ -1,4 +1,5 @@
 import React from 'react';
+import '@/i18n/i18n';
 import type {StyleProp, ViewStyle} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import {useColor} from '@/utils/color/color.ts';
@@ -7,6 +8,7 @@ import type {
   TextLayoutEventData,
 } from 'react-native/Libraries/Types/CoreEventTypes';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
+import {useTranslation} from 'react-i18next';
 
 interface CellParam {
   item: ScoreCalcItem;
@@ -21,6 +23,7 @@ const ScoreCalcViewDescCell = ({
   listItem,
   style,
 }: CellParam): React.ReactElement => {
+  const {t} = useTranslation();
   const color = useColor();
   const [descLine, setDescLine] = React.useState<number>(0);
   const [showFullDesc, setShowFullDesc] = React.useState(false);
@@ -52,7 +55,8 @@ const ScoreCalcViewDescCell = ({
               },
               styles.desc,
             ]}>
-            【更新日志】{'\n'}
+            {t('scorecalc.desc.update_log')}
+            {'\n'}
             {listItem?.updateBrief}
           </Text>
         )}
@@ -77,7 +81,9 @@ const ScoreCalcViewDescCell = ({
             styles.more,
           ]}
           onPress={() => setShowFullDesc(!showFullDesc)}>
-          {showFullDesc ? '收起' : '更多...'}
+          {showFullDesc
+            ? t('scorecalc.desc.collapse')
+            : t('scorecalc.desc.more')}
         </Text>
       )}
     </View>

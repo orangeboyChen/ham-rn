@@ -10,6 +10,7 @@ import FetchScoreView from './src/components/education/score/FetchScoreView';
 import ScoreCalcView from './src/components/scorecalc/ScoreCalcView';
 import BatchedBridge from 'react-native/Libraries/BatchedBridge/BatchedBridge';
 import {educationCallableModule} from '@/business/education/module';
+import {initI18n} from '@/i18n/i18n';
 
 AppRegistry.registerComponent('RNCasMobileLogin', () => CasMobileLogin);
 AppRegistry.registerComponent('RNCommon', () => Common);
@@ -20,3 +21,8 @@ BatchedBridge.registerCallableModule(
   'RNEducationCallable',
   educationCallableModule,
 );
+const bootstrap = async () => {
+  await initI18n();
+};
+
+bootstrap().then(() => {});

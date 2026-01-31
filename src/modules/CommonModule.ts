@@ -3,7 +3,7 @@
  * @version 1.0
  * @date 2024/8/3 18:06
  */
-import {NativeModules} from 'react-native';
+import {type NativeModule, NativeModules} from 'react-native';
 const {CommonModule} = NativeModules;
 
 /**
@@ -13,7 +13,10 @@ const {CommonModule} = NativeModules;
  */
 type ToastType = 'success' | 'error' | 'normal';
 
-export default CommonModule as {
+interface CommonModuleInterface extends NativeModule {
   openUrl: (url: string) => void;
   showToast: (type: ToastType, message: string, hint: string) => void;
-};
+  getLocale: () => Promise<string>;
+}
+
+export default CommonModule as CommonModuleInterface;

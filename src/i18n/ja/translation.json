@@ -1,0 +1,64 @@
+{
+  "cas": {
+    "invalid_student_id": "正しい学籍番号を入力してください",
+    "student_id_placeholder": "学籍番号",
+    "password_placeholder": "パスワード",
+    "login_button": "ログイン",
+    "remember_me": "ログイン状態を保持",
+    "agree_prefix": "智慧珞珈を読み、同意しました",
+    "privacy_policy": "プライバシーポリシー",
+    "university_name": "武漢大学",
+    "privacy_agreement_tip": "プライバシーポリシーを先にお読みの上、同意してください！",
+    "account_expired_tip": "このアカウントは期限切れです",
+    "invalid_username_or_password_tip": "ユーザー名またはパスワードが正しくありません"
+  },
+  "common": {
+    "contact_author": "スクリプトの作者に連絡してください",
+    "network_error": "ネットワークエラーが発生しました",
+    "script_invalid": "スクリプト検証に失敗しました",
+    "selected": "選択しました"
+  },
+  "education": {
+    "course_fetch_failed_with_reason": "授業の取得に失敗しました！{{reason}}",
+    "loading": "読み込み中",
+    "login_failed_full": "教務システムのログインに失敗しました！{{reason}}",
+    "login_failed_reason": "「マイ -> ポータルログイン」から再ログインしてみてください。",
+    "score_fetch_failed_with_reason": "成績の取得に失敗しました！{{reason}}",
+    "semester_not_set": "学期開始日が設定されていません"
+  },
+  "scorecalc": {
+    "current": {
+      "latest": "最新",
+      "none": "未選択",
+      "title": "使用中",
+      "update": "アップデート",
+      "upgraded": "更新しました"
+    },
+    "desc": {
+      "collapse": "折りたたむ",
+      "more": "もっと...",
+      "update_log": "【更新履歴】"
+    },
+    "dev": {
+      "done": "完了",
+      "placeholder": "コードを貼り付け",
+      "title": "開発デバッグ",
+      "verify_failed": "検証に失敗しました",
+      "verify_failed_detail": "コードに構文エラーがないか確認してください",
+      "verify_success": "検証に成功しました"
+    },
+    "github": {
+      "subtitle": "GitHubでPRを作成",
+      "title": "成績計算方式を開発"
+    },
+    "item": {
+      "current": "現在",
+      "select": "選択",
+      "upgrade": "アップデート"
+    },
+    "other": {
+      "empty": "現在はありません。お楽しみに",
+      "title": "別の計算方式を選択"
+    }
+  }
+}
