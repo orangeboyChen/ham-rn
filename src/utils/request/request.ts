@@ -26,7 +26,7 @@ const requestPost = ({
   contentType,
 }: {
   url: string | URL | globalThis.Request;
-  body: BodyInit_;
+  body: BodyInit;
   headers?: {[key: string]: string};
   contentType?: 'application/json' | 'application/x-www-form-urlencoded';
 }): Promise<Response> => {

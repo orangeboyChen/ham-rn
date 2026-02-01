@@ -1,7 +1,8 @@
-import {parseResponse} from './parser.ts';
-import {requestGet, requestPost} from '@/utils/request/request.ts';
-import Log from '@/modules/Log.ts';
-import * as cheerio from 'cheerio';
+import {parseResponse} from './parser';
+import {requestGet, requestPost} from '@/utils/request/request';
+import Log from '@/modules/NativeLog';
+// @ts-ignore
+import {load as cheerioLoad} from 'cheerio/dist/browser';
 
 /**
  * @author orangeboyChen
@@ -24,7 +25,7 @@ const getUserInfo = async (): Promise<UserInfo> => {
   });
   const str = await response.text();
 
-  const $ = cheerio.load(str);
+  const $ = cheerioLoad(str);
 
   // 1. 学号
   const src = $('img.media-object').attr('src') || '';

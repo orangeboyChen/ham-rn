@@ -7,14 +7,14 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import '@/i18n/i18n';
 import type {ThemeColor} from '@/utils/color/color.ts';
-import ScoreCalcViewDescCell from './ScoreCalcViewDescCell.tsx';
+import ScoreCalcViewDescCell from './ScoreCalcViewDescCell';
 import {StyleSheet} from 'react-native';
-import Card from '@/utils/ui/Card.tsx';
+import Card from '@/utils/ui/Card';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
 import Color from 'color';
-import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
-import CommonModule from '@/modules/CommonModule.ts';
-import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch.ts';
+import ScoreCalcModule from '@/modules/NativeScoreCalcModule';
+import CommonModule from '@/modules/NativeCommonModule';
+import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch';
 import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewCurrentCardParams {
@@ -60,7 +60,7 @@ const ScoreCalcViewCurrentCard = ({
         return;
       }
     }
-    const res = await ScoreCalcModule.selectCalc(listItem);
+    const res = ScoreCalcModule.selectCalc(listItem);
     if (!res) {
       CommonModule.showToast(
         'error',

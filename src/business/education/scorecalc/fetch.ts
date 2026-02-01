@@ -4,7 +4,6 @@
  * @date 2024/8/3 17:33
  */
 import type {ScoreCalcItem} from './type.ts';
-import {ScoreCalcItemType} from './type.ts';
 
 const fetchScoreCalcFromGithub = async (): Promise<Array<ScoreCalcItem>> => {
   const res = await fetch(
@@ -14,7 +13,7 @@ const fetchScoreCalcFromGithub = async (): Promise<Array<ScoreCalcItem>> => {
   return Object.keys(json).map(key => {
     return {
       url: `https://raw.githubusercontent.com/whu-ham/ScoreCalculator/main/${key}`,
-      type: ScoreCalcItemType.GITHUB,
+      type: 'GITHUB',
       script: '',
       ...json[key],
     } as ScoreCalcItem;

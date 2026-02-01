@@ -2,7 +2,7 @@ import React from 'react';
 import '@/i18n/i18n';
 import type {StyleProp, ViewStyle} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
-import {useColor} from '@/utils/color/color.ts';
+import {useColor} from '@/utils/color/color';
 import type {
   NativeSyntheticEvent,
   TextLayoutEventData,

@@ -7,13 +7,13 @@ import React, {useEffect} from 'react';
 import '@/i18n/i18n';
 import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {ActivityIndicator, Text, View} from 'react-native';
-import EducationModule from '@/modules/EducationModule.ts';
+import EducationModule from '@/modules/NativeEducationModule.ts';
 import {loginEducation} from '@/business/education';
 import {getScoreList} from '@/business/education/score';
-import Log from '@/modules/Log.ts';
-import {generateValidate} from '@/business/education/api.ts';
+import Log from '@/modules/NativeLog.ts';
+import {generateValidate} from '@/business/education/api';
 import {useTranslation} from 'react-i18next';
-import {getUserInfo} from '@/business/education/score/api.ts';
+import {getUserInfo} from '@/business/education/score/api';
 
 const FetchScoreView = (): React.ReactElement => {
   const {t} = useTranslation();

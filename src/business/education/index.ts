@@ -3,6 +3,6 @@
  * @version 1.0
  * @date 2024/7/15 18:22
  */
-import {loginEducation} from './api.ts';
+import {loginEducation} from './api';
 
 export {loginEducation};

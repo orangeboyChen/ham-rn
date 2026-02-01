@@ -1,5 +1,5 @@
 import Cas from '../cas';
-import Log from '@/modules/Log.ts';
+import Log from '@/modules/NativeLog.ts';
 
 /**
  * @author orangeboyChen

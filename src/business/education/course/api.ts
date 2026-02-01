@@ -1,6 +1,6 @@
-import {parseResponse} from './parser.ts';
-import {requestPost} from '@/utils/request/request.ts';
-import Log from '@/modules/Log.ts';
+import {parseResponse} from './parser';
+import {requestPost} from '@/utils/request/request';
+import Log from '@/modules/NativeLog';
 
 /**
  * @author orangeboyChen

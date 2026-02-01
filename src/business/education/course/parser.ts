@@ -1,5 +1,5 @@
 import type {CourseEntity, CourseGridEntity} from './type.ts';
-import {getRandomColorHexString} from './color.ts';
+import {getRandomColorHexString} from './color';
 
 /**
  * @author orangeboyChen

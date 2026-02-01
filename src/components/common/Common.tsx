@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import Log from '@/modules/Log.ts';
+import Log from '@/modules/NativeLog';
 import {HotUpdater} from '@hot-updater/react-native';
+import NativeCommonModule from '@/modules/NativeCommonModule';
+import i18n from '@/i18n/i18n';
+import NativeLog from '@/modules/NativeLog';
 
 /**
  * @author orangeboyChen
@@ -29,6 +32,17 @@ function Common() {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    const unsub = NativeCommonModule.onLocaleChanged(() => {
+      NativeLog.i('Common', 'onLocaleChanged');
+      i18n.changeLanguage(NativeCommonModule.getLocale());
+    });
+    return () => {
+      unsub.remove();
+    };
+  }, []);
+
   return <View />;
 }
 

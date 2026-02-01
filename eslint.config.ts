@@ -9,6 +9,7 @@ export default defineConfig([
   {
     plugins: {
       '@typescript-eslint': tseslint.plugin,
+      // @ts-ignore
       'react-native': fixupPluginRules(reactNative),
     },
     files: ['**/*.{ts,tsx,js,jsx}'],

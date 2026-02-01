@@ -1,27 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-  NativeEventEmitter,
-  Platform,
-} from 'react-native';
+import {View, StyleSheet, Animated, Platform} from 'react-native';
 import ScrollView = Animated.ScrollView;
-import {useColor} from '@/utils/color/color.ts';
-import ScoreCalcViewCurrentCard from './component/ScoreCalcViewCurrentCard.tsx';
-import ScoreCalcViewGoToGithubCard from './component/ScoreCalcViewGoToGithubCard.tsx';
-import ScoreCalcViewOtherCard from './component/other/ScoreCalcViewOtherCard.tsx';
+import {useColor} from '@/utils/color/color';
+import ScoreCalcViewCurrentCard from './component/ScoreCalcViewCurrentCard';
+import ScoreCalcViewGoToGithubCard from './component/ScoreCalcViewGoToGithubCard';
+import ScoreCalcViewOtherCard from './component/other/ScoreCalcViewOtherCard';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
-import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
-import ScoreCalcViewDevCard from './component/ScoreCalcViewDevCard.tsx';
+import ScoreCalcModule from '@/modules/NativeScoreCalcModule';
+import ScoreCalcViewDevCard from './component/ScoreCalcViewDevCard';
 import {
   fetchScoreCalcFromGithub,
   fetchScoreCalcFromLocal,
-} from '@/business/education/scorecalc/fetch.ts';
+} from '@/business/education/scorecalc/fetch';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import NativeLog from '@/modules/NativeLog';
 
 /**
  * @author orangeboyChen
@@ -69,24 +64,23 @@ const ScoreCalcViewContent = ({paddingTop}: {paddingTop: number}) => {
     updateCurrentItem();
   }, []);
   useEffect(() => {
-    const eventBus = new NativeEventEmitter(ScoreCalcModule);
-    const listener = eventBus.addListener('onSetScoreJsCalcItem', () => {
+    const unsub = ScoreCalcModule.onSetScoreJsCalcItem(() => {
+      NativeLog.i('ScoreCalcView', 'onSetScoreJsCalcItem');
       updateCurrentItem();
     });
     return () => {
-      listener.remove();
+      unsub.remove();
     };
   }, []);
 
   const updateCurrentItem = (): void => {
-    ScoreCalcModule.getCurrentCalc().then(str => {
-      try {
-        const item = JSON.parse(str) as ScoreCalcItem;
-        setCurrentItem(item);
-      } catch {
-        setCurrentItem(undefined);
-      }
-    });
+    const str = ScoreCalcModule.getCurrentCalc();
+    try {
+      const item = JSON.parse(str) as ScoreCalcItem;
+      setCurrentItem(item);
+    } catch {
+      setCurrentItem(undefined);
+    }
   };
 
   const updateScoreCalcFromLocal = async () => {

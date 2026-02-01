@@ -1,7 +1,7 @@
 import React from 'react';
 import type {WebViewMessageEvent} from 'react-native-webview';
 import {WebView} from 'react-native-webview';
-import {html as rawHtml} from './resource/html.ts';
+import {html as rawHtml} from './resource/html';
 
 /**
  * @author orangeboyChen

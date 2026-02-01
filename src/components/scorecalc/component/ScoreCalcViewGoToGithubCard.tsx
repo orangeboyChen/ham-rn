@@ -1,10 +1,10 @@
 import {Appearance, Image, Text, TouchableOpacity, View} from 'react-native';
-import Card from '@/utils/ui/Card.tsx';
+import Card from '@/utils/ui/Card';
 import React from 'react';
 import '@/i18n/i18n';
 import type {ThemeColor} from '@/utils/color/color.ts';
 import {StyleSheet} from 'react-native';
-import CommonModule from '@/modules/CommonModule.ts';
+import CommonModule from '@/modules/NativeCommonModule.ts';
 import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewGoToGithubCardParams {

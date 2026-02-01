@@ -1,4 +1,4 @@
-import Api from './api.ts';
+import Api from './api';
 
 /**
  * @author orangeboyChen
