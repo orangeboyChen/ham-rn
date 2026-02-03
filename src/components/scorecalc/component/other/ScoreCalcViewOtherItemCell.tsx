@@ -17,7 +17,6 @@ import {
 import Color from 'color';
 import type {ThemeColor} from '@/utils/color/color.ts';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
-import {ScoreCalcItemType} from '@/business/education/scorecalc/type.ts';
 import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewOtherItemCellParams {
@@ -66,7 +65,7 @@ const ScoreCalcViewOtherItemCell = ({
             {item.title}
           </Text>
           <View style={styles.briefContainer}>
-            {item.type === ScoreCalcItemType.GITHUB ? (
+            {item.type === 'GITHUB' ? (
               <Image
                 source={
                   Appearance.getColorScheme() === 'dark'

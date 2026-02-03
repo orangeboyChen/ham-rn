@@ -4,7 +4,7 @@
  * @date 2024/7/15 18:19
  */
 
-import {getCourseList} from './api.ts';
+import {getCourseList} from './api';
 import type {CourseEntity, CourseGridEntity} from './type.ts';
 
 export {getCourseList};

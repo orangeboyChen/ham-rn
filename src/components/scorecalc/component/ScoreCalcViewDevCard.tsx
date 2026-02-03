@@ -1,11 +1,10 @@
 import React from 'react';
 import '@/i18n/i18n';
-import Card from '@/utils/ui/Card.tsx';
+import Card from '@/utils/ui/Card';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import type {ThemeColor} from '@/utils/color/color.ts';
-import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
-import {ScoreCalcItemType} from '@/business/education/scorecalc/type.ts';
-import CommonModule from '@/modules/CommonModule.ts';
+import ScoreCalcModule from '@/modules/NativeScoreCalcModule';
+import CommonModule from '@/modules/NativeCommonModule';
 import {useTranslation} from 'react-i18next';
 
 const ScoreCalcViewDevCard = ({
@@ -17,7 +16,7 @@ const ScoreCalcViewDevCard = ({
   const [code, setCode] = React.useState<string>('');
 
   const verifyCode = async () => {
-    const res = await ScoreCalcModule.testItem({
+    const res = ScoreCalcModule.testItem({
       url: '',
       author: '',
       brief: '',
@@ -25,7 +24,7 @@ const ScoreCalcViewDevCard = ({
       desc: '',
       script: code,
       title: '',
-      type: ScoreCalcItemType.APP,
+      type: 'APP',
       updateBrief: '',
       version: 0,
     });

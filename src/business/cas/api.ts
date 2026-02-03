@@ -1,5 +1,6 @@
-import CasModule from '@/modules/CasModule.ts';
-import {requestGet} from '@/utils/request/request.ts';
+import CasModule from '@/modules/NativeCasModule';
+import {requestGet} from '@/utils/request/request';
+import NativeLog from '@/modules/NativeLog';
 
 /**
  * @author orangeboyChen
@@ -8,10 +9,12 @@ import {requestGet} from '@/utils/request/request.ts';
  */
 
 const fastLogin = async ({service}: {service: string}) => {
+  const casCookie = CasModule.requestCasCookie();
+  NativeLog.i('CAS', `fastLogin - casCookie: ${casCookie}`);
   return await requestGet({
     url: `https://cas.whu.edu.cn/authserver/login?service=${service}`,
     headers: {
-      Cookie: await CasModule.requestCasCookie(),
+      Cookie: CasModule.requestCasCookie(),
     },
   });
 };

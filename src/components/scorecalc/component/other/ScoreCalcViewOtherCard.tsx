@@ -7,15 +7,15 @@ import React from 'react';
 import '@/i18n/i18n';
 import {Text, View} from 'react-native';
 import Color from 'color';
-import Card from '@/utils/ui/Card.tsx';
+import Card from '@/utils/ui/Card';
 import type {ThemeColor} from '@/utils/color/color.ts';
-import ScoreCalcViewOtherItemCell from './ScoreCalcViewOtherItemCell.tsx';
+import ScoreCalcViewOtherItemCell from './ScoreCalcViewOtherItemCell';
 import {StyleSheet} from 'react-native';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
-import ScoreCalcModule from '@/modules/ScoreCalcModule.ts';
-import CommonModule from '@/modules/CommonModule.ts';
-import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch.ts';
-import Log from '@/modules/Log.ts';
+import ScoreCalcModule from '@/modules/NativeScoreCalcModule';
+import CommonModule from '@/modules/NativeCommonModule';
+import {getJsScriptFromGithub} from '@/business/education/scorecalc/fetch';
+import Log from '@/modules/NativeLog';
 import {useTranslation} from 'react-i18next';
 
 interface ScoreCalcViewOtherCardParams {
@@ -82,7 +82,7 @@ const ScoreCalcViewOtherCard = ({
                     return;
                   }
                 }
-                const res = await ScoreCalcModule.selectCalc(item);
+                const res = ScoreCalcModule.selectCalc(item);
                 if (!res) {
                   CommonModule.showToast(
                     'error',

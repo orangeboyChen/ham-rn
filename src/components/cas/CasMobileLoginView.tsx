@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {WebView} from 'react-native-webview';
-import type {Cookies} from '@react-native-cookies/cookies';
-import CookieManager from '@react-native-cookies/cookies';
 import type {ViewStyle} from 'react-native';
 import {Linking} from 'react-native';
 import {Platform} from 'react-native';
-import CasMobileLoginModule from '@/modules/CasMobileLoginModule.ts';
-import Log from '@/modules/Log.ts';
-import {useColor} from '@/utils/color/color.ts';
+import CasMobileLoginModule from '@/modules/NativeCasMobileLoginModule';
+import Log from '@/modules/NativeLog';
+import {useColor} from '@/utils/color/color';
 import '@/i18n/i18n';
 import {useTranslation} from 'react-i18next';
+import type {Cookies} from '@preeternal/react-native-cookie-manager';
+import CookieManager from '@preeternal/react-native-cookie-manager';
 
 /**
  * @author orangeboyChen

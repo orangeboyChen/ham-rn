@@ -1,5 +1,9 @@
-import {generateValidate, loginEducation} from '@/business/education/api.ts';
-import EducationModule from '@/modules/EducationModule.ts';
+import {generateValidate, loginEducation} from '@/business/education/api';
+import type {
+  NativeCourseEntity,
+  NativeCourseGridEntity,
+} from '@/modules/NativeEducationModule';
+import EducationModule from '@/modules/NativeEducationModule';
 import type {CourseEntity, CourseGridEntity} from '@/business/education/course';
 import {getCourseList} from '@/business/education/course';
 import {getScoreList} from '@/business/education/score';
@@ -7,7 +11,8 @@ import type {
   ScoreEntity,
   ScoreRequestUserInfo,
 } from '@/business/education/score/type.ts';
-import {getUserInfo} from '@/business/education/score/api.ts';
+import {getUserInfo} from '@/business/education/score/api';
+import i18n from '@/i18n/i18n';
 
 /**
  * @author orangeboyChen
@@ -19,31 +24,43 @@ const updateCourseList = async (year: number, semester: number) => {
     await loginEducation();
   } catch (e: unknown) {
     if (e instanceof Error) {
-      EducationModule.onGetCourseList([], `教务系统登录失败! ${e.message}`);
+      EducationModule.onGetCourseList(
+        [],
+        [],
+        i18n.t('education.login_failed_full', {reason: e.message}),
+      );
     }
     return;
   }
 
   let courseListResult: Map<CourseEntity, CourseGridEntity[]>;
   try {
-    courseListResult = await getCourseList({
+    [courseListResult] = await getCourseList({
       year: year,
       semester: semester,
       validate: generateValidate(),
     });
   } catch (e: unknown) {
     if (e instanceof Error) {
-      EducationModule.onGetCourseList([], `获取课程失败! ${e.message}`);
+      EducationModule.onGetCourseList(
+        [],
+        [],
+        i18n.t('education.course_fetch_failed_with_reason', {
+          reason: e.message,
+        }),
+      );
     }
     return;
   }
 
-  const result: Record<string, string> = {};
+  const nativeCourseList: NativeCourseEntity[] = [];
+  const nativeCourseGridList: NativeCourseGridEntity[][] = [];
   for (let entry of courseListResult.entries()) {
     const [course, courseGridList] = entry;
-    result[JSON.stringify(course)] = JSON.stringify(courseGridList);
+    nativeCourseList.push(course);
+    nativeCourseGridList.push(courseGridList);
   }
-  EducationModule.onGetCourseList(result, null);
+  EducationModule.onGetCourseList(nativeCourseList, nativeCourseGridList, null);
 };
 
 const updateScoreList = async () => {
@@ -51,7 +68,11 @@ const updateScoreList = async () => {
     await loginEducation();
   } catch (e: unknown) {
     if (e instanceof Error) {
-      EducationModule.onGetScoreList('', '', `教务系统登录失败! ${e.message}`);
+      EducationModule.onGetScoreList(
+        '',
+        '',
+        i18n.t('education.login_failed_full', {reason: e.message}),
+      );
     }
     return;
   }
@@ -75,7 +96,13 @@ const updateScoreList = async () => {
     }
   } catch (e: unknown) {
     if (e instanceof Error) {
-      EducationModule.onGetCourseList([], `获取成绩失败! ${e.message}`);
+      EducationModule.onGetCourseList(
+        [],
+        [],
+        i18n.t('education.score_fetch_failed_with_reason', {
+          reason: e.message,
+        }),
+      );
     }
     return;
   }

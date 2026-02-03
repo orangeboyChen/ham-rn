@@ -1,5 +1,5 @@
 import type {CourseEntity, CourseGridEntity} from './type.ts';
-import {getRandomColorHexString} from './color.ts';
+import {getRandomColorHexString} from './color';
 
 /**
  * @author orangeboyChen
@@ -19,6 +19,10 @@ const parseResponse = ({
   semester,
 }: {
   json: {
+    xsxx: {
+      XH_ID?: string;
+      XH?: string;
+    };
     kbList: {
       kcmc?: string;
       jxbmc?: string;
@@ -34,7 +38,7 @@ const parseResponse = ({
   };
   year: number;
   semester: number;
-}): Map<CourseEntity, CourseGridEntity[]> => {
+}): [Map<CourseEntity, CourseGridEntity[]>, {studentId: string}] => {
   const kbList = json.kbList;
   const result = new Map<CourseEntity, CourseGridEntity[]>();
   for (let data of kbList) {
@@ -86,7 +90,7 @@ const parseResponse = ({
 
     result.set(course, courseGridList);
   }
-  return result;
+  return [result, {studentId: json.xsxx.XH ?? json.xsxx.XH_ID}];
 };
 
 const getEmptyCourseGridWithWeek = (

@@ -8,10 +8,13 @@ import '@/i18n/i18n';
 import type {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {ActivityIndicator, Text, View} from 'react-native';
 import {getCourseList} from '@/business/education/course';
-import EducationModule from '@/modules/EducationModule.ts';
+import EducationModule, {
+  type NativeCourseEntity,
+  type NativeCourseGridEntity,
+} from '@/modules/NativeEducationModule';
 import {loginEducation} from '@/business/education';
-import Log from '@/modules/Log.ts';
-import {generateValidate} from '@/business/education/api.ts';
+import Log from '@/modules/NativeLog';
+import {generateValidate} from '@/business/education/api';
 import {useTranslation} from 'react-i18next';
 import i18n from '@/i18n/i18n';
 
@@ -23,7 +26,7 @@ const FetchCourseView = (): React.ReactElement => {
         'FetchCourseView',
         `doGetCourseList - error! err=${JSON.stringify(err)}`,
       );
-      EducationModule.onGetCourseList({}, err.message);
+      EducationModule.onGetCourseList([], [], err.message);
     });
   }, []);
   return (
@@ -38,22 +41,24 @@ const FetchCourseView = (): React.ReactElement => {
 
 const doGetCourseList = async () => {
   await loginEducation();
-  const {year, semester} = await EducationModule.getCourseConfig();
+  const {year, semester} = EducationModule.getCourseConfig();
   if (!year || !semester) {
     throw Error(i18n.t('education.semester_not_set'));
   }
 
-  const courseListResult = await getCourseList({
+  const [courseListResult] = await getCourseList({
     year: year,
     semester: semester,
     validate: generateValidate(),
   });
-  const result: Record<string, string> = {};
+  const nativeCourseList: NativeCourseEntity[] = [];
+  const nativeCourseGridList: NativeCourseGridEntity[][] = [];
   for (let entry of courseListResult.entries()) {
     const [course, courseGridList] = entry;
-    result[JSON.stringify(course)] = JSON.stringify(courseGridList);
+    nativeCourseList.push(course);
+    nativeCourseGridList.push(courseGridList);
   }
-  EducationModule.onGetCourseList(result, null);
+  EducationModule.onGetCourseList(nativeCourseList, nativeCourseGridList, null);
 };
 
 const containerStyle: StyleProp<ViewStyle> = {

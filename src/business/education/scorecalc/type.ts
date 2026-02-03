@@ -1,8 +1,3 @@
-enum ScoreCalcItemType {
-  APP = 0,
-  GITHUB = 1,
-}
-
 interface ScoreCalcItem {
   title: string;
   date: string;
@@ -11,10 +6,9 @@ interface ScoreCalcItem {
   brief: string;
   updateBrief: string;
   desc: string;
-  type: ScoreCalcItemType;
+  type: 'APP' | 'GITHUB';
   url: string;
   script: string;
 }
 
-export {ScoreCalcItemType};
 export type {ScoreCalcItem};

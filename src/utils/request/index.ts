@@ -1,4 +1,4 @@
-import {requestGet, requestPost} from './request.ts';
+import {requestGet, requestPost} from './request';
 
 export default {
   requestGet,

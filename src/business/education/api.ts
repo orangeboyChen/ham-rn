@@ -1,5 +1,5 @@
 import Cas from '../cas';
-import Log from '@/modules/Log.ts';
+import Log from '@/modules/NativeLog';
 
 /**
  * @author orangeboyChen
@@ -11,7 +11,9 @@ const loginEducation = async () => {
   const res = await Cas.Api.fastLogin({
     service: 'https%3A%2F%2Fjwgl.whu.edu.cn%2Fsso%2Fjznewsixlogin',
   });
-  if (res.url.indexOf('index_initMenu.html') === -1) {
+  const text = await res.text();
+  Log.i('loginEducation', `response=${text}`);
+  if (text.indexOf('教学管理信息服务平台') === -1) {
     Log.e('EducationApi', `login education error! res.url=${res.url}`);
     const errReason = await parseJsError(res);
     const realReason = errReason.length
