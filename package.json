@@ -32,7 +32,7 @@
     "@babel/core": "^7.28.6",
     "@babel/preset-env": "^7.28.6",
     "@babel/runtime": "^7.28.6",
-    "@eslint/compat": "^1.4.1",
+    "@eslint/compat": "^2.0.2",
     "@eslint/js": "^8.1.0",
     "@hot-updater/bare": "0.25.7",
     "@hot-updater/cloudflare": "0.25.7",
