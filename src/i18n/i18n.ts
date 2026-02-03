@@ -5,8 +5,6 @@ import en from './en/translation.json';
 import ja from './ja/translation.json';
 import zh from './zh/translation.json';
 import CommonModule from '@/modules/NativeCommonModule';
-import {DeviceEventEmitter} from 'react-native';
-import Log from '@/modules/NativeLog';
 
 const resources: Resource = {
   en: {
