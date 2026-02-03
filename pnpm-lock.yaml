@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@hot-updater/react-native':
         specifier: 0.25.7
-        version: 0.25.7(hot-updater@0.25.7(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3))(react-native@0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+        version: 0.25.7(hot-updater@0.25.8(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3))(react-native@0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       '@preeternal/react-native-cookie-manager':
         specifier: ^6.3.0
         version: 6.3.0(react-native@0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4))(react@19.2.4)
@@ -130,8 +130,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(eslint@9.39.2(jiti@2.6.1))
       hot-updater:
-        specifier: ^0.25.7
-        version: 0.25.7(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3)
+        specifier: ^0.25.8
+        version: 0.25.8(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@25.1.0)
@@ -160,6 +160,10 @@ packages:
     resolution: {integrity: sha512-JYgintcMjRiCvS8mMECzaEn+m3PfoQiyqukOMCCVQtoJGYJw8j/8LBJEiqkHLkfwCcs74E3pbAUFNg7d9VNJ+Q==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/code-frame@7.29.0':
+    resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/compat-data@7.28.6':
     resolution: {integrity: sha512-2lfu57JtzctfIrcGMz992hyLlByuzgIk58+hhGCxjKZ3rWI82NnVLjXcaTqkI2NvlcvOskZaiZ5kjUALo3Lpxg==}
     engines: {node: '>=6.9.0'}
@@ -177,6 +181,10 @@ packages:
 
   '@babel/generator@7.28.6':
     resolution: {integrity: sha512-lOoVRwADj8hjf7al89tvQ2a1lf53Z+7tiXMgpZJL3maQPDxh0DgLMN62B2MKUOFcoodBHLMbDM6WAbKgNy5Suw==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/generator@7.29.0':
+    resolution: {integrity: sha512-vSH118/wwM/pLR38g/Sgk05sNtro6TlTJKuiMXDaZqPUfjTFcudpCOt00IhOfj+1BFAX+UFAlzCU+6WXr3GLFQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-annotate-as-pure@7.27.3':
@@ -268,6 +276,11 @@ packages:
 
   '@babel/parser@7.28.6':
     resolution: {integrity: sha512-TeR9zWR18BvbfPmGbLampPMW+uW1NZnJlRuuHso8i87QZNq2JRF9i6RgxRqtEq+wQGsS19NNTWr2duhnE49mfQ==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  '@babel/parser@7.29.0':
+    resolution: {integrity: sha512-IyDgFV5GeDUVX4YdF/3CPULtVGSXXMLh1xVIgdCgxApktqnQV0r7/8Nqthg+8YLGaAtdyIlo2qIdZrbCv4+7ww==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -804,8 +817,16 @@ packages:
     resolution: {integrity: sha512-fgWX62k02qtjqdSNTAGxmKYY/7FSL9WAS1o2Hu5+I5m9T0yxZzr4cnrfXQ/MX0rIifthCSs6FKTlzYbJcPtMNg==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/traverse@7.29.0':
+    resolution: {integrity: sha512-4HPiQr0X7+waHfyXPZpWPfWL/J7dcN1mx9gL6WdQVMbPnF3+ZhSMs8tCxN7oHddJE9fhNE7+lxdnlyemKfJRuA==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/types@7.28.6':
     resolution: {integrity: sha512-0ZrskXVEHSWIqZM/sQZ4EV3jZJXRkio/WCxaqKZP1g//CEWEPSfeZFcms4XeKBCHU0ZKnIkdJeU/kF+eRp5lBg==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.29.0':
+    resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
 
   '@bcoe/v8-coverage@0.2.3':
@@ -1094,11 +1115,11 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hot-updater/android-helper@0.25.7':
-    resolution: {integrity: sha512-h8r39+Zm0oj4K2EdVIAAOz8MrzpwIyn2WpJ+ova0/O0OrR1MK8Lb0Yw0YxgcwIBuZU8CQijK2i9/Dj0L6FTxHw==}
+  '@hot-updater/android-helper@0.25.8':
+    resolution: {integrity: sha512-jpSibcMWpFEHZrJywCzhsZ47uZYmz0JOW3qjirYHjEnclvuhSAUbU1b/BuoZVryKzdx+YZnqiidmLJII0YPI9w==}
 
-  '@hot-updater/apple-helper@0.25.7':
-    resolution: {integrity: sha512-o+FC3m/oGWcnjgJiDsv8tEAy4VhrOWq2vzpEus+stbRMOScYRMiPCh3TJVqKZAGVUrR3kyjVxUHZvk3Lm3aSmw==}
+  '@hot-updater/apple-helper@0.25.8':
+    resolution: {integrity: sha512-6/hxnobeS6qac1qRFhqGtJC5jWGgqhFOXc2XOWfKwgyWmCwPafhTjMILXDUV+U5LKybpGOlovk93++f7197fXg==}
 
   '@hot-updater/bare@0.25.7':
     resolution: {integrity: sha512-9mqn8ErZqCmxODYEfnQ1NW+U9ntAL+7tVs7R+lfw8b1yvJrz2bZjsuWPnCOGDmKiIUfeoltSpFmuDSJZbX+H1A==}
@@ -1111,20 +1132,37 @@ packages:
       typescript:
         optional: true
 
+  '@hot-updater/cli-tools@0.25.8':
+    resolution: {integrity: sha512-vE1SNGcMDC21aZmLS8qr2/0raFIx8IXi9O9YeZsCoa9/eZBIFYLxcuoUz2Lv0ylAOLHmfU7Ri8yX1A9RK9Z0Wg==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   '@hot-updater/cloudflare@0.25.7':
     resolution: {integrity: sha512-dikA2p8DZyhd8kOawz8HQ6wEq2/uew7ExEFAf0EgNtC+myOCoRM8TFVnreyk3OWq2XIgG/8+DvChkKhDMezkng==}
 
-  '@hot-updater/console@0.25.7':
-    resolution: {integrity: sha512-LTfv1SpQ63xvdlWoKsEkYqC2Zcj9N2XNdB5Q4iFhElMFp46j4oULJwaObrqJ+XA9w52usovEeUG1+bsGN9kFyA==}
+  '@hot-updater/console@0.25.8':
+    resolution: {integrity: sha512-w9LnK/wZnDiX1QRimX6N7551KxvoARTzyJCJIWjwfufTyCAh3rcC+X3imHYI2uSnoAUxch0fHcRwuJSpfdkr3Q==}
 
   '@hot-updater/core@0.25.7':
     resolution: {integrity: sha512-fnlib3Qz0T4tYnbhH/1rhhXacW7n3htA7QKJMJJbrLCIoPztAfWbEicK7SVzEHw827ykEdPlyuhyDHgzkTRq2A==}
 
+  '@hot-updater/core@0.25.8':
+    resolution: {integrity: sha512-t+ney5LStHWPD5ldVsPdC3zXOiCjysTGLogldD+X/FNwg7drML3lJXwQNb7n73vJqOWLZnf1NPmVZZI06ww5ww==}
+
   '@hot-updater/js@0.25.7':
     resolution: {integrity: sha512-GEyOE5cSht9ZmalZBARaTxDu0AyJSicMWDOnKow30qt4hz28zYBtYnyDDG3kPp33zA7C45xVAMtoCjJRS6xtXg==}
 
+  '@hot-updater/js@0.25.8':
+    resolution: {integrity: sha512-DqgqHNTBF+a95UbCppjCwlC+iAtRNszx2YXZraTZ+yiX7j1ddoWQnPNCF/j8B2r8h6pHe0ZOvBszOHqWrbHgDw==}
+
   '@hot-updater/plugin-core@0.25.7':
     resolution: {integrity: sha512-JrLhL05n03CBct8lKszqAxFQbkwvghx73K2OvnJcrMRsecPHUi0G4aC2YW7aKw29Uq+1A5RwSmfsHYMUPSzOOg==}
+
+  '@hot-updater/plugin-core@0.25.8':
+    resolution: {integrity: sha512-ENyUG1KHDai4vy35Qnj/jnWFs3ZF+E7EkV2Du5e2s8a3LqRME5MeAMtgFyDtYYiSaTi+X1icAsLDucR/8gIYvA==}
 
   '@hot-updater/react-native@0.25.7':
     resolution: {integrity: sha512-HMs7mRo5NkGwlTLH+KZk29C8zyG5GsAA32mhCrelRdyA0XCi9YEtnjNeR/JOcKfPMERzZlqg5Vh5/cIsFLjfTg==}
@@ -1139,8 +1177,8 @@ packages:
       hot-updater:
         optional: true
 
-  '@hot-updater/server@0.25.7':
-    resolution: {integrity: sha512-N34m2/7SoOqjSeyhztv3hT+iGjXkrsyBWKp8D6KfcZx1vqp/OMox/fEfH2/txfLBwbcshCoNaSntep66sQXNyw==}
+  '@hot-updater/server@0.25.8':
+    resolution: {integrity: sha512-UftyIlI9cDfzQ7BbIWyGp1SQk6vUy/xUIOk0BuS6VJspZRwLAaMWBKxF/5E+KE5XOV+KwtOqUvWAuZituETGpA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1188,105 +1226,89 @@ packages:
     resolution: {integrity: sha512-excjX8DfsIcJ10x1Kzr4RcWe1edC9PquDRRPx3YVCvQv+U5p7Yin2s32ftzikXojb1PIFc/9Mt28/y+iRklkrw==}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linux-arm@1.2.4':
     resolution: {integrity: sha512-bFI7xcKFELdiNCVov8e44Ia4u2byA+l3XtsAj+Q8tfCwO6BQ8iDojYdvoPMqsKDkuoOo+X6HZA0s0q11ANMQ8A==}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linux-ppc64@1.2.4':
     resolution: {integrity: sha512-FMuvGijLDYG6lW+b/UvyilUWu5Ayu+3r2d1S8notiGCIyYU/76eig1UfMmkZ7vwgOrzKzlQbFSuQfgm7GYUPpA==}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linux-riscv64@1.2.4':
     resolution: {integrity: sha512-oVDbcR4zUC0ce82teubSm+x6ETixtKZBh/qbREIOcI3cULzDyb18Sr/Wcyx7NRQeQzOiHTNbZFF1UwPS2scyGA==}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linux-s390x@1.2.4':
     resolution: {integrity: sha512-qmp9VrzgPgMoGZyPvrQHqk02uyjA0/QrTO26Tqk6l4ZV0MPWIW6LTkqOIov+J1yEu7MbFQaDpwdwJKhbJvuRxQ==}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linux-x64@1.2.4':
     resolution: {integrity: sha512-tJxiiLsmHc9Ax1bz3oaOYBURTXGIRDODBqhveVHonrHJ9/+k89qbLl0bcJns+e4t4rvaNBxaEZsFtSfAdquPrw==}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-libvips-linuxmusl-arm64@1.2.4':
     resolution: {integrity: sha512-FVQHuwx1IIuNow9QAbYUzJ+En8KcVm9Lk5+uGUQJHaZmMECZmOlix9HnH7n1TRkXMS0pGxIJokIVB9SuqZGGXw==}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@img/sharp-libvips-linuxmusl-x64@1.2.4':
     resolution: {integrity: sha512-+LpyBk7L44ZIXwz/VYfglaX/okxezESc6UxDSoyo2Ks6Jxc4Y7sGjpgU9s4PMgqgjj1gZCylTieNamqA1MF7Dg==}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@img/sharp-linux-arm64@0.34.5':
     resolution: {integrity: sha512-bKQzaJRY/bkPOXyKx5EVup7qkaojECG6NLYswgktOZjaXecSAeCWiZwwiFf3/Y+O1HrauiE3FVsGxFg8c24rZg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linux-arm@0.34.5':
     resolution: {integrity: sha512-9dLqsvwtg1uuXBGZKsxem9595+ujv0sJ6Vi8wcTANSFpwV/GONat5eCkzQo/1O6zRIkh0m/8+5BjrRr7jDUSZw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linux-ppc64@0.34.5':
     resolution: {integrity: sha512-7zznwNaqW6YtsfrGGDA6BRkISKAAE1Jo0QdpNYXNMHu2+0dTrPflTLNkpc8l7MUP5M16ZJcUvysVWWrMefZquA==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linux-riscv64@0.34.5':
     resolution: {integrity: sha512-51gJuLPTKa7piYPaVs8GmByo7/U7/7TZOq+cnXJIHZKavIRHAP77e3N2HEl3dgiqdD/w0yUfiJnII77PuDDFdw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linux-s390x@0.34.5':
     resolution: {integrity: sha512-nQtCk0PdKfho3eC5MrbQoigJ2gd1CgddUMkabUj+rBevs8tZ2cULOx46E7oyX+04WGfABgIwmMC0VqieTiR4jg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linux-x64@0.34.5':
     resolution: {integrity: sha512-MEzd8HPKxVxVenwAa+JRPwEC7QFjoPWuS5NZnBt6B3pu7EG2Ge0id1oLHZpPJdn3OQK+BQDiw9zStiHBTJQQQQ==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@img/sharp-linuxmusl-arm64@0.34.5':
     resolution: {integrity: sha512-fprJR6GtRsMt6Kyfq44IsChVZeGN97gTD331weR1ex1c1rypDEABN6Tm2xa1wE6lYb5DdEnk03NZPqA7Id21yg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@img/sharp-linuxmusl-x64@0.34.5':
     resolution: {integrity: sha512-Jg8wNT1MUzIvhBFxViqrEhWDGzqymo3sV7z7ZsaWbZNDLXRJZoRGrjulp60YYtV4wfY8VIKcWidjojlLcWrd8Q==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@img/sharp-wasm32@0.34.5':
     resolution: {integrity: sha512-OdWTEiVkY2PHwqkbBI8frFxQQFekHaSSkUIJkwzclWZe64O1X4UlUjqqqLaPbUpMOQk6FBu/HtlGXNblIs0huw==}
@@ -1490,42 +1512,36 @@ packages:
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-transform/binding-linux-arm64-musl@0.82.1':
     resolution: {integrity: sha512-NuoEvfNYipnsNK/seeojB2o319p6fxiLHbUKkxsTesG5G4z6/XNktmRDLcOehtVHZxO8TwsoNC+5HN12/IEn8A==}
     engines: {node: '>=14.0.0'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@oxc-transform/binding-linux-riscv64-gnu@0.82.1':
     resolution: {integrity: sha512-YyzchyTgdoTmNENcRAF9rF+WcDSfXUd4bvuRvp+dB5hwGA/Q9lnuPJw5Mljs9f5crxq0f4/veh7Gt4eo+nh5AA==}
     engines: {node: '>=14.0.0'}
     cpu: [riscv64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-transform/binding-linux-s390x-gnu@0.82.1':
     resolution: {integrity: sha512-RM3n6/m33dOhzFRhYC0A1+gCnFrCfh0AW+eL2GkAh5jdlfWJdInNI1oOl0W3zxUmuXQKmuJGQtk7oDM/EC/Agg==}
     engines: {node: '>=14.0.0'}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-transform/binding-linux-x64-gnu@0.82.1':
     resolution: {integrity: sha512-ljIj2f5Vatk1Pcf0eNBCRw8bWcNyHsYMnIh8EjcCaHvT6PFt5ToZepwDFuq7nDTowVTpuIQtcASOKgIUYvOi+w==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@oxc-transform/binding-linux-x64-musl@0.82.1':
     resolution: {integrity: sha512-XbqwQ5RSxR101W0HNldEo1nW24rA0dq0QjyzNYVA9/Pt4SPuj85YwB699hZwJirmsRPWG52x3Yj+e7WzJQF67Q==}
     engines: {node: '>=14.0.0'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@oxc-transform/binding-wasm32-wasi@0.82.1':
     resolution: {integrity: sha512-snIudOVieyU+3CvgJ3Ya0miCSuXYSma2URa0oHQZ+eYbTq6UMq9/z7Pa2gEuNuzEVbuQO6SbL/JfhPsD3jcHng==}
@@ -3012,8 +3028,8 @@ packages:
   hermes-parser@0.32.0:
     resolution: {integrity: sha512-g4nBOWFpuiTqjR3LZdRxKUkij9iyveWeuks7INEsMX741f3r9xxrOe8TeQfUxtda0eXmiIFiMQzoeSQEno33Hw==}
 
-  hot-updater@0.25.7:
-    resolution: {integrity: sha512-iHX/U2BmxKStG8q67e14nfu+Zf+0z45qWPjNbXf6/5y2x9VtM6AJDqD3rx+d7nJ+fHJNkELYQhUW4mikKydxqg==}
+  hot-updater@0.25.8:
+    resolution: {integrity: sha512-XVMrFnS8ny+teLOTeCAF5lPONHpQgDWDE51+PpkVyLs+X48YeyTfXO11t8EfRqXuClSWRBldcxE9UVCeS4ataw==}
     hasBin: true
     peerDependencies:
       '@hot-updater/aws': '*'
@@ -3779,6 +3795,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -4763,6 +4780,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-fetch@3.6.20:
     resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
@@ -4936,6 +4954,12 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
+  '@babel/code-frame@7.29.0':
+    dependencies:
+      '@babel/helper-validator-identifier': 7.28.5
+      js-tokens: 4.0.0
+      picocolors: 1.1.1
+
   '@babel/compat-data@7.28.6': {}
 
   '@babel/core@7.28.6':
@@ -4970,6 +4994,14 @@ snapshots:
     dependencies:
       '@babel/parser': 7.28.6
       '@babel/types': 7.28.6
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.31
+      jsesc: 3.1.0
+
+  '@babel/generator@7.29.0':
+    dependencies:
+      '@babel/parser': 7.29.0
+      '@babel/types': 7.29.0
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
       jsesc: 3.1.0
@@ -5095,6 +5127,10 @@ snapshots:
   '@babel/parser@7.28.6':
     dependencies:
       '@babel/types': 7.28.6
+
+  '@babel/parser@7.29.0':
+    dependencies:
+      '@babel/types': 7.29.0
 
   '@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.28.5(@babel/core@7.28.6)':
     dependencies:
@@ -5742,7 +5778,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@babel/traverse@7.29.0':
+    dependencies:
+      '@babel/code-frame': 7.29.0
+      '@babel/generator': 7.29.0
+      '@babel/helper-globals': 7.28.0
+      '@babel/parser': 7.29.0
+      '@babel/template': 7.28.6
+      '@babel/types': 7.29.0
+      debug: 4.4.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@babel/types@7.28.6':
+    dependencies:
+      '@babel/helper-string-parser': 7.27.1
+      '@babel/helper-validator-identifier': 7.28.5
+
+  '@babel/types@7.29.0':
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
@@ -5961,19 +6014,19 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hot-updater/android-helper@0.25.7(typescript@5.9.3)':
+  '@hot-updater/android-helper@0.25.8(typescript@5.9.3)':
     dependencies:
-      '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
-      '@hot-updater/core': 0.25.7
-      '@hot-updater/plugin-core': 0.25.7
+      '@hot-updater/cli-tools': 0.25.8(typescript@5.9.3)
+      '@hot-updater/core': 0.25.8
+      '@hot-updater/plugin-core': 0.25.8
       execa: 9.5.2
     transitivePeerDependencies:
       - typescript
 
-  '@hot-updater/apple-helper@0.25.7(typescript@5.9.3)':
+  '@hot-updater/apple-helper@0.25.8(typescript@5.9.3)':
     dependencies:
-      '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
-      '@hot-updater/plugin-core': 0.25.7
+      '@hot-updater/cli-tools': 0.25.8(typescript@5.9.3)
+      '@hot-updater/plugin-core': 0.25.8
       execa: 9.5.2
       fast-xml-parser: 5.2.3
     transitivePeerDependencies:
@@ -5993,6 +6046,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
+  '@hot-updater/cli-tools@0.25.8(typescript@5.9.3)':
+    dependencies:
+      '@hot-updater/plugin-core': 0.25.8
+      oxc-transform: 0.82.1
+    optionalDependencies:
+      typescript: 5.9.3
+
   '@hot-updater/cloudflare@0.25.7(typescript@5.9.3)':
     dependencies:
       '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
@@ -6004,11 +6064,11 @@ snapshots:
       - encoding
       - typescript
 
-  '@hot-updater/console@0.25.7(solid-js@1.9.10)(typescript@5.9.3)':
+  '@hot-updater/console@0.25.8(solid-js@1.9.10)(typescript@5.9.3)':
     dependencies:
-      '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
-      '@hot-updater/core': 0.25.7
-      '@hot-updater/plugin-core': 0.25.7
+      '@hot-updater/cli-tools': 0.25.8(typescript@5.9.3)
+      '@hot-updater/core': 0.25.8
+      '@hot-updater/plugin-core': 0.25.8
       solid-icons: 1.2.0(solid-js@1.9.10)
     transitivePeerDependencies:
       - solid-js
@@ -6016,9 +6076,15 @@ snapshots:
 
   '@hot-updater/core@0.25.7': {}
 
+  '@hot-updater/core@0.25.8': {}
+
   '@hot-updater/js@0.25.7':
     dependencies:
       '@hot-updater/core': 0.25.7
+
+  '@hot-updater/js@0.25.8':
+    dependencies:
+      '@hot-updater/core': 0.25.8
 
   '@hot-updater/plugin-core@0.25.7':
     dependencies:
@@ -6027,7 +6093,14 @@ snapshots:
       mime: 4.1.0
       semver: 7.7.3
 
-  '@hot-updater/react-native@0.25.7(hot-updater@0.25.7(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3))(react-native@0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4))(react@19.2.4)(typescript@5.9.3)':
+  '@hot-updater/plugin-core@0.25.8':
+    dependencies:
+      '@hot-updater/core': 0.25.8
+      es-toolkit: 1.44.0
+      mime: 4.1.0
+      semver: 7.7.3
+
+  '@hot-updater/react-native@0.25.7(hot-updater@0.25.8(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3))(react-native@0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4))(react@19.2.4)(typescript@5.9.3)':
     dependencies:
       '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
       '@hot-updater/core': 0.25.7
@@ -6037,15 +6110,15 @@ snapshots:
       react-native: 0.83.1(@babel/core@7.28.6)(@react-native-community/cli@20.0.0(typescript@5.9.3))(@react-native/metro-config@0.83.1(@babel/core@7.28.6))(@types/react@19.2.10)(react@19.2.4)
       use-sync-external-store: 1.5.0(react@19.2.4)
     optionalDependencies:
-      hot-updater: 0.25.7(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3)
+      hot-updater: 0.25.8(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
-  '@hot-updater/server@0.25.7(typeorm@0.3.28)':
+  '@hot-updater/server@0.25.8(typeorm@0.3.28)':
     dependencies:
-      '@hot-updater/core': 0.25.7
-      '@hot-updater/js': 0.25.7
-      '@hot-updater/plugin-core': 0.25.7
+      '@hot-updater/core': 0.25.8
+      '@hot-updater/js': 0.25.8
+      '@hot-updater/plugin-core': 0.25.8
       fumadb: 0.2.2(typeorm@0.3.28)
       rou3: 0.7.9
       semver: 7.7.3
@@ -8375,16 +8448,16 @@ snapshots:
     dependencies:
       hermes-estree: 0.32.0
 
-  hot-updater@0.25.7(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3):
+  hot-updater@0.25.8(@hot-updater/cloudflare@0.25.7(typescript@5.9.3))(@types/node@25.1.0)(solid-js@1.9.10)(typeorm@0.3.28)(typescript@5.9.3):
     dependencies:
       '@expo/fingerprint': 0.15.4
-      '@hot-updater/android-helper': 0.25.7(typescript@5.9.3)
-      '@hot-updater/apple-helper': 0.25.7(typescript@5.9.3)
-      '@hot-updater/cli-tools': 0.25.7(typescript@5.9.3)
-      '@hot-updater/console': 0.25.7(solid-js@1.9.10)(typescript@5.9.3)
-      '@hot-updater/core': 0.25.7
-      '@hot-updater/plugin-core': 0.25.7
-      '@hot-updater/server': 0.25.7(typeorm@0.3.28)
+      '@hot-updater/android-helper': 0.25.8(typescript@5.9.3)
+      '@hot-updater/apple-helper': 0.25.8(typescript@5.9.3)
+      '@hot-updater/cli-tools': 0.25.8(typescript@5.9.3)
+      '@hot-updater/console': 0.25.8(solid-js@1.9.10)(typescript@5.9.3)
+      '@hot-updater/core': 0.25.8
+      '@hot-updater/plugin-core': 0.25.8
+      '@hot-updater/server': 0.25.8(typeorm@0.3.28)
       cosmiconfig: 9.0.0(typescript@5.9.3)
       cosmiconfig-typescript-loader: 5.0.0(@types/node@25.1.0)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
       jiti: 2.6.1
@@ -9227,7 +9300,7 @@ snapshots:
   metro-source-map@0.83.3:
     dependencies:
       '@babel/traverse': 7.28.6
-      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.28.6'
+      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.29.0'
       '@babel/types': 7.28.6
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
@@ -9576,7 +9649,7 @@ snapshots:
 
   parse-json@5.2.0:
     dependencies:
-      '@babel/code-frame': 7.28.6
+      '@babel/code-frame': 7.29.0
       error-ex: 1.3.4
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
