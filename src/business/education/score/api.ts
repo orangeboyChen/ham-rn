@@ -3,6 +3,9 @@ import {requestGet, requestPost} from '@/utils/request/request';
 import Log from '@/modules/NativeLog';
 // @ts-ignore
 import {load as cheerioLoad} from 'cheerio/dist/browser';
+import {getCourseList} from '@/business/education/course';
+import EducationModule from '@/modules/NativeEducationModule';
+import {generateValidate} from '@/business/education/api';
 
 /**
  * @author orangeboyChen
@@ -16,7 +19,21 @@ interface UserInfo {
   college: string;
 }
 
+const getStudentIdFromEducation = async () => {
+  const {year, semester} = EducationModule.getCourseConfig();
+  const [, {studentId}] = await getCourseList({
+    year: year,
+    semester: semester,
+    validate: generateValidate(),
+  });
+  return studentId;
+};
+
 const getUserInfo = async (): Promise<UserInfo> => {
+  let studentId: string;
+  try {
+    studentId = await getStudentIdFromEducation();
+  } catch {}
   const response = await requestGet({
     url: 'https://jwgl.whu.edu.cn/xtgl/index_cxYhxxIndex.html?xt=jw&localeKey=zh_CN&_=1769360780967&gnmkdm=index',
     headers: {
@@ -43,7 +60,7 @@ const getUserInfo = async (): Promise<UserInfo> => {
   const pText = $('.media-body > p').first().text().trim();
   const college = pText.replace(/\s+\d{4}.*/, '').trim();
   return {
-    studentID: xhId,
+    studentID: studentId ?? xhId,
     name: name,
     college: college,
   };

@@ -35,7 +35,7 @@ const updateCourseList = async (year: number, semester: number) => {
 
   let courseListResult: Map<CourseEntity, CourseGridEntity[]>;
   try {
-    courseListResult = await getCourseList({
+    [courseListResult] = await getCourseList({
       year: year,
       semester: semester,
       validate: generateValidate(),

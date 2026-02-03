@@ -46,7 +46,7 @@ const doGetCourseList = async () => {
     throw Error(i18n.t('education.semester_not_set'));
   }
 
-  const courseListResult = await getCourseList({
+  const [courseListResult] = await getCourseList({
     year: year,
     semester: semester,
     validate: generateValidate(),
