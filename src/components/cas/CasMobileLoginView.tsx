@@ -56,7 +56,7 @@ const buildInjectedScript = (
      passwordPlaceholder,
    )});
    loginElement.onclick = (e) => {
-       if (usernameElement.value.length !== 13) {
+       if (usernameElement.value.length !== 13 && usernameElement.value.length !== 8) {
            showTips(${JSON.stringify(invalidStudentIdMessage)});
            return false;  
        }
