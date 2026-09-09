@@ -1,0 +1,32 @@
+diff --git a/android/build.gradle b/android/build.gradle
+index ae141453b78b3f83243ece4fb5f2f63e43379dfe..bca6ce068442fc6b55e73598086367413b501957 100644
+--- a/android/build.gradle
++++ b/android/build.gradle
+@@ -1,17 +1,7 @@
+ import java.nio.file.Paths
+ 
+-buildscript {
+-    ext.safeExtGet = {prop ->
+-        rootProject.ext.has(prop) ? rootProject.ext.get(prop) : project.properties['ReactNativeWebView_' + prop]
+-    }
+-    repositories {
+-        google()
+-        gradlePluginPortal()
+-    }
+-    dependencies {
+-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion')}")
+-        classpath("com.android.tools.build:gradle:7.0.4")
+-    }
++ext.safeExtGet = {prop ->
++    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : project.properties['ReactNativeWebView_' + prop]
+ }
+ 
+ def getExtOrIntegerDefault(prop) {
+@@ -57,7 +47,6 @@ apply plugin: 'com.android.library'
+ if (isNewArchitectureEnabled()) {
+     apply plugin: 'com.facebook.react'
+ }
+-apply plugin: 'kotlin-android'
+ 
+ android {
+     if (supportsNamespace()) {
