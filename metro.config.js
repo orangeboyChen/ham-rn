@@ -14,7 +14,11 @@ const config = {
     },
     blockList: [
       /scripts\/.*/,
-      /src\/business\/education\/scorecalc\/embed\/(?!generated\/).*/,
+      // Only block the hand-written embed sources, not the `generated/`
+      // directory. Metro crawls directories before files, so a pattern that
+      // also matches `embed/generated` would prune the whole subtree and
+      // break resolution of the generated bundles.
+      /src\/business\/education\/scorecalc\/embed\/[^/]+\.tsx?$/,
     ],
   },
 };

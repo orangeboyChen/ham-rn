@@ -6,7 +6,6 @@
 import type {ColorValue} from 'react-native';
 import {Appearance} from 'react-native';
 import {useEffect, useState} from 'react';
-import AppearanceListener = Appearance.AppearanceListener;
 
 interface ThemeColor {
   ham_red: ColorValue;
@@ -82,7 +81,9 @@ const useColor = () => {
     Appearance.getColorScheme() === 'dark' ? darkColor : lightColor,
   );
   useEffect(() => {
-    const changeListener: AppearanceListener = prep => {
+    const changeListener: Parameters<
+      typeof Appearance.addChangeListener
+    >[0] = prep => {
       setColor(prep.colorScheme === 'dark' ? darkColor : lightColor);
     };
     Appearance.addChangeListener(changeListener);
