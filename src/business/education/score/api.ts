@@ -30,7 +30,7 @@ const getStudentIdFromEducation = async () => {
 };
 
 const getUserInfo = async (): Promise<UserInfo> => {
-  let studentId: string;
+  let studentId: string | undefined;
   try {
     studentId = await getStudentIdFromEducation();
   } catch {}

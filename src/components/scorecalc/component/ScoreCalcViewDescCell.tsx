@@ -3,10 +3,6 @@ import '@/i18n/i18n';
 import type {StyleProp, ViewStyle} from 'react-native';
 import {StyleSheet, Text, View} from 'react-native';
 import {useColor} from '@/utils/color/color';
-import type {
-  NativeSyntheticEvent,
-  TextLayoutEventData,
-} from 'react-native/Libraries/Types/CoreEventTypes';
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type.ts';
 import {useTranslation} from 'react-i18next';
 
@@ -27,7 +23,12 @@ const ScoreCalcViewDescCell = ({
   const color = useColor();
   const [descLine, setDescLine] = React.useState<number>(0);
   const [showFullDesc, setShowFullDesc] = React.useState(false);
-  const onDescLayout = (event: NativeSyntheticEvent<TextLayoutEventData>) => {
+  // React Native ships two `CoreEventTypes` definitions (legacy vs generated)
+  // whose `TextLayoutEvent` shapes differ. Derive the parameter type from the
+  // component so it always matches the props `Text` actually declares.
+  const onDescLayout: NonNullable<
+    React.ComponentProps<typeof Text>['onTextLayout']
+  > = event => {
     setDescLine(event.nativeEvent.lines.length);
   };
 

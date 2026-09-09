@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("com.facebook.react")
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.0"
 }
 
 /**
@@ -106,7 +105,7 @@ android {
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = enableProguardInReleaseBuilds
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     buildFeatures {
