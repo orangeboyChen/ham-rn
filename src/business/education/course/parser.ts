@@ -90,7 +90,7 @@ const parseResponse = ({
 
     result.set(course, courseGridList);
   }
-  return [result, {studentId: json.xsxx.XH ?? json.xsxx.XH_ID}];
+  return [result, {studentId: json.xsxx.XH ?? json.xsxx.XH_ID ?? ''}];
 };
 
 const getEmptyCourseGridWithWeek = (
