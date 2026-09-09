@@ -38,7 +38,7 @@ const parseResponse = ({
   };
   year: number;
   semester: number;
-}): [Map<CourseEntity, CourseGridEntity[]>, {studentId: string}] => {
+}): [Map<CourseEntity, CourseGridEntity[]>, {studentId?: string}] => {
   const kbList = json.kbList;
   const result = new Map<CourseEntity, CourseGridEntity[]>();
   for (let data of kbList) {
@@ -90,7 +90,10 @@ const parseResponse = ({
 
     result.set(course, courseGridList);
   }
-  return [result, {studentId: json.xsxx.XH ?? json.xsxx.XH_ID ?? ''}];
+  // Keep this optional: callers fall back to another student ID source with
+  // `??`, and an empty string is not nullish, so coercing a missing value to
+  // '' here would silently defeat that fallback.
+  return [result, {studentId: json.xsxx.XH ?? json.xsxx.XH_ID}];
 };
 
 const getEmptyCourseGridWithWeek = (

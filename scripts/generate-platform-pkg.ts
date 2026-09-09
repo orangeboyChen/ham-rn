@@ -25,6 +25,14 @@ function readBasePkg() {
 
   delete pkg.scripts;
   delete pkg['lint-staged'];
+  // pnpm.patchedDependencies points at patches/ relative to this repo's root.
+  // The generated package.json is written to build/{ios,android} and installed
+  // from there, where patches/ does not exist, so pnpm aborts with
+  //   ENOENT: no such file or directory, open '.../build/ios/patches/...'
+  // The patches only rewrite Android Gradle buildscript blocks, which matter
+  // for this repo's android/ app build, not for the downstream repos that
+  // consume this package.json.
+  delete pkg.pnpm;
 
   return pkg;
 }
