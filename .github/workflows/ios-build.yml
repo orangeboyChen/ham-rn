@@ -37,9 +37,18 @@ jobs:
           path: |
             ios/Pods
             ~/Library/Caches/CocoaPods
-          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
+          # The Pods tree depends on the resolved react-native version, not just
+          # on Podfile.lock: bumping react-native swaps the hermes-engine podspec
+          # without changing Podfile.lock, so a cache keyed only on Podfile.lock
+          # restores Pods/Local Podspecs for the previous RN version and
+          # `pod install` then fails with
+          # "CocoaPods could not find compatible versions for pod hermes-engine".
+          #
+          # Deliberately no `restore-keys` fallback: a prefix match would restore
+          # a Pods tree built against a different react-native version, which is
+          # exactly the failure this key is meant to avoid. A miss just rebuilds
+          # Pods from scratch.
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock', 'node_modules/react-native/sdks/hermes-engine/version.properties', 'node_modules/react-native/package.json') }}
       - name: Install CocoaPods dependencies
         working-directory: ios
         run: pod _1.16.2_ install --no-repo-update
