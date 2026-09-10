@@ -71,6 +71,7 @@ jobs:
       # comes from ios/ham-rn.xcodeproj: PRODUCT_BUNDLE_IDENTIFIER is
       # org.reactjs.native.example.$(PRODUCT_NAME) and PRODUCT_NAME is ham-rn.
       - name: Boot simulator
+        id: simulator
         uses: futureware-tech/simulator-action@v4
         with:
           model: 'iPhone 16'
@@ -97,6 +98,17 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
 
+      # `xcodebuild build` only produces a .app — it does not install it, and
+      # simulator-action only boots the device. Without this step Maestro's
+      # launchApp fails with FBSOpenApplicationServiceErrorDomain code=4
+      # ("Simulator device failed to launch <bundle id>"), which reads like a
+      # launch problem when the app was never installed.
+      - name: Install app on simulator
+        run: |
+          xcrun simctl install \
+            "${{ steps.simulator.outputs.udid }}" \
+            "ios/build/e2e/Build/Products/Release-iphonesimulator/ham-rn.app"
+
       - name: Install Maestro
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
@@ -114,7 +126,9 @@ jobs:
       # to the debug shell, not to this workflow; until then the flow cannot go
       # in CI. Recorded in docs/e2e.md.
       - name: Run iOS flows
-        run: maestro test .maestro/ios/scorecalc.yaml
+        run: |
+          maestro test --device "${{ steps.simulator.outputs.udid }}" \
+            .maestro/ios/scorecalc.yaml
 
       - name: Upload Maestro artifacts
         if: failure()
@@ -178,11 +192,19 @@ jobs:
       # i.e. it looks for a Metro server that is not running.
       # app/build.gradle.kts already signs release with the checked-in debug
       # keystore, so no extra secrets are needed.
+      #
+      # -PreactNativeArchitectures overrides android/gradle.properties, which
+      # builds arm64-v8a only. The emulator below is x86_64, and an arm64-only
+      # APK installed on it crashes on launch with SoLoaderDSONotFoundError for
+      # libreactnative.so — the app dies in MainApplication.onCreate and every
+      # assertion then times out, which looks like a flow problem rather than an
+      # ABI mismatch. Overriding here rather than editing gradle.properties
+      # keeps the arm64 default intact for the other Android workflows.
       - name: Build Android Release
         working-directory: android
         env:
           GRADLE_OPTS: -Xmx4096m
-        run: ./gradlew assembleRelease --no-daemon
+        run: ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=x86_64
 
       - name: Install Maestro
         run: |
@@ -205,8 +227,17 @@ jobs:
           # transitions keep the hierarchy "unsettled" long past it.
           disable-animations: true
           script: |
+            adb logcat -c
             adb install -r android/app/build/outputs/apk/release/app-release.apk
             maestro test .maestro/android/scorecalc.yaml
+
+      # Always dump logcat. When the flow fails on a blank RN screen, the only
+      # way to tell why is the app's own log (bundle load errors, native
+      # crashes) — without this the job reports a bare failed assertion and
+      # nothing else.
+      - name: Dump logcat
+        if: always()
+        run: adb logcat -d -t 300 || true
 
       - name: Upload Maestro artifacts
         if: failure()
