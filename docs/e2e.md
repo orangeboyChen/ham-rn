@@ -70,6 +70,32 @@ cd android && ./gradlew assembleRelease --no-daemon
 Maestro drives an already-installed app; it does not build or install one.
 Install the Release build yourself before running flows.
 
+### CI runners, and the Android ABI trap
+
+The two e2e jobs deliberately run on different operating systems:
+
+- **iOS on `macos-15`** — the simulator needs Xcode.
+- **Android on `ubuntu-latest`** — Linux runners expose `/dev/kvm`, so the
+  emulator gets hardware acceleration. macOS runners have none, and the same
+  emulator falls back to software rendering and Maestro times out waiting for
+  the app. The workflow enables KVM group permissions before the emulator
+  starts; without that step the runner user cannot open `/dev/kvm`.
+
+On Android the **APK's ABI must match the emulator**. `android/gradle.properties`
+sets `reactNativeArchitectures=arm64-v8a`, so `assembleRelease` produces an
+arm64-only APK by default. Installing that on the x86_64 emulator CI used to
+run crashed the app in `MainApplication.onCreate`:
+
+```
+SoLoaderDSONotFoundError: couldn't find DSO to load: libreactnative.so
+```
+
+The app dies before any RN content renders, so every assertion times out and
+the failure looks like a flow problem rather than an ABI mismatch. The workflow
+passes `-PreactNativeArchitectures=x86_64` to override the gradle property for
+the e2e build only, leaving the arm64 default intact for the other Android
+workflows. If you ever switch the emulator to `arm64-v8a`, drop the override.
+
 ## Running
 
 CI runs only the scorecalc flow, and it runs it **non-blocking** — a red e2e
