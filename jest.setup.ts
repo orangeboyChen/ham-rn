@@ -3,6 +3,16 @@
  *
  * Everything here is a default that individual tests can override with
  * `jest.mock(...)` or by calling the exported helpers.
+ *
+ * NOTE: @testing-library/react-native v14's `render`, `fireEvent` and
+ * `renderHook` are ASYNC — they return Promises. Every call must be awaited:
+ *
+ *     await render(<MyComponent />);
+ *     await fireEvent.press(screen.getByTestId('x'));
+ *
+ * Without the await, `render` resolves to an empty object, no query functions
+ * are registered, and the global `screen` throws
+ * "`render` function has not been called".
  */
 import '@testing-library/react-native/matchers';
 
