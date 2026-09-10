@@ -231,14 +231,10 @@ jobs:
             adb install -r android/app/build/outputs/apk/release/app-release.apk
             maestro test .maestro/android/scorecalc.yaml
 
-      # Always dump logcat. When the flow fails on a blank RN screen, the only
-      # way to tell why is the app's own log (bundle load errors, native
-      # crashes) — without this the job reports a bare failed assertion and
-      # nothing else.
-      - name: Dump logcat
-        if: always()
-        run: adb logcat -d -t 300 || true
-
+      # No separate logcat step: Maestro already writes device-logcat.txt and
+      # crash-report.txt into ~/.maestro/tests/, which this step uploads. An
+      # `adb logcat` out here would also hang — it runs after the action has
+      # shut the emulator down, so there is no device for adb to attach to.
       - name: Upload Maestro artifacts
         if: failure()
         uses: actions/upload-artifact@v4
