@@ -1,3 +1,4 @@
+import React from 'react';
 import {render, screen, waitFor} from '@testing-library/react-native';
 import FetchCourseView from '@/components/education/course/FetchCourseView';
 import FetchScoreView from '@/components/education/score/FetchScoreView';
