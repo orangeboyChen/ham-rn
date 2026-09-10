@@ -8,8 +8,11 @@ on:
     branches:
       - main
 
+# Include github.job: ios and android are separate jobs in this workflow, and
+# without it they share one concurrency group, so whichever starts second
+# cancels the first (both jobs end up "cancelled" before Maestro ever runs).
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  group: ${{ github.workflow }}-${{ github.job }}-${{ github.event.pull_request.number || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
