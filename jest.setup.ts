@@ -84,3 +84,53 @@ jest.mock('@/modules/NativeScoreCalcModule', () => {
     },
   };
 });
+
+// `react-native-webview` pulls in three native modules at import time. Only
+// the module registry is stubbed here, so the WebView component itself still
+// renders and tests can assert on its props. Tests that do not want a real
+// WebView in the tree should mock the whole `react-native-webview` package.
+jest.mock('react-native-webview/lib/NativeRNCWebViewModule', () => ({
+  __esModule: true,
+  default: {
+    onShouldStartLoadWithRequest: jest.fn(),
+    isFileUploadSupported: jest.fn(() => Promise.resolve(true)),
+  },
+}));
+
+jest.mock('react-native-webview/lib/RNCWebViewNativeComponent', () => {
+  const react = require('react');
+  const {View} = require('react-native');
+  return {
+    __esModule: true,
+    default: react.forwardRef((props: unknown, ref: unknown) =>
+      react.createElement(View, {...(props as object), ref}),
+    ),
+  };
+});
+
+// `@preeternal/react-native-cookie-manager` resolves a native module at import
+// time, which `index.js` reaches through the CAS login view.
+jest.mock('@preeternal/react-native-cookie-manager', () => ({
+  __esModule: true,
+  default: {
+    clearAll: jest.fn(() => Promise.resolve(true)),
+    getAll: jest.fn(() => Promise.resolve({})),
+    get: jest.fn(() => Promise.resolve({})),
+    set: jest.fn(() => Promise.resolve(true)),
+  },
+}));
+
+// `@hot-updater/react-native` also resolves a native module at import time.
+// `wrap` is identity so the wrapped component renders unmodified; tests that
+// care about update behaviour should override this mock locally.
+jest.mock('@hot-updater/react-native', () => ({
+  HotUpdater: {
+    wrap: () => (component: unknown) => component,
+    addListener: jest.fn(() => jest.fn()),
+    getChannel: jest.fn(() => 'test'),
+    getAppVersion: jest.fn(() => '0.0.1'),
+    isUpdateDownloaded: jest.fn(() => false),
+    getFingerprintHash: jest.fn(() => 'test-fingerprint'),
+    runUpdateProcess: jest.fn(() => Promise.resolve(false)),
+  },
+}));

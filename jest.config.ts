@@ -16,6 +16,7 @@ const ESM_DEPS = [
   'cheerio',
   'i18next',
   'react-i18next',
+  'react-native-webview',
 ].join('|');
 
 const config: Config.InitialOptions = {
@@ -23,6 +24,11 @@ const config: Config.InitialOptions = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testMatch: ['<rootDir>/__tests__/**/*.test.ts?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '/android/', '/ios/'],
+  moduleNameMapper: {
+    // `cheerio/dist/browser` is a browser-targeted ESM bundle that Metro
+    // resolves but Jest cannot. The Node build exposes the same `load` API.
+    '^cheerio/dist/browser$': 'cheerio',
+  },
   transformIgnorePatterns: [
     `node_modules/(?!(@react-native|react-native|@preeternal|${ESM_DEPS})/)`,
     `node_modules/(${ESM_DEPS})/node_modules/(?!(${ESM_DEPS})/)`,
