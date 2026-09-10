@@ -23,20 +23,19 @@ env:
   MAESTRO_VERSION: '2.10.0'
 
 jobs:
-  # NON-BLOCKING. Both jobs report status but neither fails the PR.
-  #
-  # The flows themselves are sound — they pass reliably on a settled device — but
-  # repeated cold launches of an RN app degrade the simulator/emulator within a
-  # run. Measured on a macOS simulator: consecutive runs went 5/5 steps, then
-  # 2/5, then 3/5, then 0/5; after a ~20s cooldown a single run passed 5/5
-  # again. That is an environment limit, not a flow bug, and it is not something
-  # this workflow can fix. Marking the job non-blocking keeps the signal (a real
-  # regression like building Debug instead of Release still shows up as a red X)
-  # without making PRs fail on simulator flake. See docs/e2e.md.
+  # Both jobs run once per PR and both gate the merge. They were non-blocking
+  # at first, because repeated cold launches of an RN app degraded the local
+  # simulator across runs (measured 5/5 steps, then 2/5, 3/5, 0/5; a single
+  # run after a cooldown passed 5/5 again). On CI each job runs exactly once on
+  # a fresh runner, which is the "settled device" case, and both pass reliably
+  # (iOS ~16m, Android ~9m). So the flake that motivated non-blocking does not
+  # apply here, and keeping it would mean a real regression (building Debug
+  # instead of Release) would only show as a red X nobody has to act on. If
+  # flakiness appears, revisit this decision rather than silently re-adding
+  # continue-on-error. See docs/e2e.md.
 
   ios:
     runs-on: macos-15
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -146,7 +145,6 @@ jobs:
     # waiting for the app. The KVM step below is what makes the device
     # usable — without it the runner user cannot open /dev/kvm.
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 

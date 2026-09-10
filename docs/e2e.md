@@ -98,11 +98,10 @@ workflows. If you ever switch the emulator to `arm64-v8a`, drop the override.
 
 ## Running
 
-CI runs only the scorecalc flow, and it runs it **non-blocking** — a red e2e
-job does not fail the PR. Both reasons are covered below: smoke is excluded
-because it cannot pass, and the job is non-blocking because repeated runs wear
-down the simulator. See
-[Known instability](#known-instability-across-repeated-runs).
+CI runs only the scorecalc flow, on both platforms. See
+[What is worth testing](#what-is-worth-testing) for why smoke is excluded, and
+[Known instability](#known-instability-across-repeated-runs) for what to expect
+if you run flows repeatedly by hand.
 
 ```bash
 # iOS (simulator must already be running, Release app already installed)
@@ -229,8 +228,8 @@ screen renders in a real native container", and Jest for everything else.
 ## Known instability across repeated runs
 
 **The flows pass on a settled device, but degrade when you run them repeatedly.**
-This is why CI marks both e2e jobs `continue-on-error: true`. Measured on a
-macOS 15 simulator, running the same flow back to back with no cooldown:
+Measured on a local macOS simulator, running the same flow back to back with no
+cooldown:
 
 ```
 run1: 5/5 steps COMPLETED
@@ -241,19 +240,53 @@ run4: 0/5
 single run: 5/5 COMPLETED
 ```
 
-Two failure shapes, both environment-level, not flow bugs:
+This does **not** affect CI: each job runs exactly once on a fresh runner,
+which is the settled-device case. Both e2e jobs pass there (iOS ~16m,
+Android ~9m), so they gate the merge. `continue-on-error` was set initially
+because of the local numbers above; it was removed once CI proved stable. If
+the jobs start failing intermittently on CI, investigate rather than
+re-adding `continue-on-error` — a non-blocking job is one nobody has to act on.
+
+Two failure shapes when running locally, both environment-level, not flow bugs:
 
 - `launchApp` fails outright with
   `FBSOpenApplicationServiceErrorDomain, code=4` — the simulator cannot open the
-  app at all.
-- The flow hangs partway (`Tap on ...` COMPLETED, next assertion never
-  returns).
+  app at all. Note this is also the error you get when the app was never
+  installed; check `simctl get_app_container booted <bundle-id>` before
+  assuming it is simulator wear.
 
 What is *not* the cause: it is not a network problem, and it is not the wait
 timeout. `extendedWaitUntil` with a 60s timeout does not prevent it. Repeated
 cold launches of an RN app is what wears the simulator down. (An earlier claim
 in this file that timeouts fixed the flake was wrong — that measurement had a
 buggy pass/fail check. The data above supersedes it.)
+
+> Note the `code=4` error has two distinct causes with the same message — app not
+> installed, or simulator degraded. They are easy to confuse. Check install first:
+> it is the cheaper one to rule out.
+
+## CI setup, and the two traps that cost the most time
+
+Both jobs failed when first added, for two separate reasons worth recording,
+because neither error message pointed at the actual cause:
+
+1. **The app was never installed.** `xcodebuild build` produces a `.app` and
+   does not install it, and `simulator-action` only boots the device. Maestro
+   then failed at `launchApp` with `FBSOpenApplicationServiceErrorDomain
+   code=4`, which reads like a launch bug. Fixed with an explicit
+   `xcrun simctl install <udid> <app>` step, and `--device <udid>` on Maestro
+   so it targets that device instead of resolving `booted`.
+
+2. **The Android APK ABI did not match the emulator.** `gradle.properties` sets
+   `reactNativeArchitectures=arm64-v8a`, so `assembleRelease` produced an
+   arm64-only APK. Installing it on the x86_64 emulator crashed in
+   `MainApplication.onCreate` with `SoLoaderDSONotFoundError: couldn't find DSO
+   to load: libreactnative.so`, before any RN content rendered, so every
+   assertion timed out. Fixed with `-PreactNativeArchitectures=x86_64`.
+
+Also: the concurrency group must include `github.job`, or the two jobs share
+one group and whichever starts second cancels the first — both reported
+`cancelled` after ~9m, before Maestro ever ran.
 
 Practically:
 
