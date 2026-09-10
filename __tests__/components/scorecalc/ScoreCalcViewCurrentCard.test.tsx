@@ -7,7 +7,6 @@
  * instead of hardcoding it.
  */
 import React from 'react';
-import type {JsonElement, JsonNode} from '@testing-library/react-native';
 import {fireEvent, render, waitFor} from '@testing-library/react-native';
 
 import type {ScoreCalcItem} from '@/business/education/scorecalc/type';
@@ -46,19 +45,51 @@ const color: ThemeColor = {
   ham_lightBlue: '#E6F1FF',
 };
 
+/**
+ * Node in RNTL's rendered JSON tree. The helpers type it as `unknown` and
+ * narrow, matching how the other suites in this repo walk the tree.
+ */
+type JsonNode = unknown;
+
 /** Collect every text node rendered underneath `node`. */
-const collectText = (node: JsonNode | null): string[] => {
-  if (!node) {
-    return [];
-  }
+const collectText = (node: JsonNode): string[] => {
   if (typeof node === 'string') {
     return [node];
   }
-  return ((node as JsonElement).children ?? []).flatMap(child =>
-    collectText(child),
-  );
+  if (node === null || typeof node !== 'object') {
+    return [];
+  }
+  const children = (node as {children?: JsonNode[]}).children ?? [];
+  return children.flatMap(child => collectText(child));
 };
 
+/** Collect every value styled under `key` anywhere in the tree. */
+const findStyleValues = (node: JsonNode, key: string): unknown[] => {
+  if (node === null || typeof node !== 'object') {
+    return [];
+  }
+  const element = node as {
+    props?: {style?: unknown};
+    children?: JsonNode[];
+  };
+  const style = element.props?.style;
+  const styles = (Array.isArray(style) ? style : [style]).filter(
+    (entry): entry is Record<string, unknown> =>
+      !!entry && typeof entry === 'object',
+  );
+  const own = styles
+    .filter(entry => key in entry)
+    .map(entry => entry[key] as unknown);
+  const nested = (element.children ?? []).flatMap(child =>
+    findStyleValues(child, key),
+  );
+  return [...own, ...nested];
+};
+
+/**
+ * Render the card. `testID` defaults to {@link TEST_ID}; pass `undefined`
+ * explicitly to exercise the branch where the prop is omitted.
+ */
 const renderCard = (props: {
   item?: ScoreCalcItem;
   listItem?: ScoreCalcItem;
@@ -71,7 +102,7 @@ const renderCard = (props: {
       item={props.item}
       listItem={props.listItem}
       onSetItem={props.onSetItem ?? jest.fn()}
-      testID={props.testID}
+      testID={'testID' in props ? props.testID : TEST_ID}
     />,
   );
 
@@ -151,9 +182,14 @@ describe('ScoreCalcViewCurrentCard', () => {
       expect(view.getByTestId(`${TEST_ID}-desc-desc`)).toHaveTextContent(
         listItem.desc,
       );
-      expect(view.getByTestId(`${TEST_ID}-desc-update-log`)).toHaveTextContent(
-        listItem.updateBrief,
+      const updateLog = view.getByTestId(`${TEST_ID}-desc-update-log`);
+      expect(updateLog).toHaveTextContent(
+        translation.scorecalc.desc.update_log,
+        {exact: false},
       );
+      expect(updateLog).toHaveTextContent(listItem.updateBrief, {
+        exact: false,
+      });
     });
   });
 
@@ -330,7 +366,7 @@ describe('ScoreCalcViewCurrentCard', () => {
 
     it('paints the empty copy with the secondary text colour', async () => {
       const view = await renderCard({item: undefined});
-      expect(view.getByTestId(`${TEST_ID}-empty`)).toHaveStyle({
+      expect(view.getByText(zh.none)).toHaveStyle({
         color: color.ham_text_secondary,
       });
     });
@@ -338,8 +374,44 @@ describe('ScoreCalcViewCurrentCard', () => {
     it('paints the latest marker with the secondary text colour', async () => {
       const item = makeScoreCalcItem({version: 1});
       const view = await renderCard({item});
-      expect(view.getByTestId(`${TEST_ID}-latest`)).toHaveStyle({
+      expect(view.getByText(zh.latest)).toHaveStyle({
         color: color.ham_text_secondary,
+      });
+    });
+
+    it('paints the update button label with the accent colour', async () => {
+      const item = makeScoreCalcItem({version: 1});
+      const listItem = makeScoreCalcItem({
+        version: 2,
+        title: item.title,
+        url: item.url,
+      });
+      const view = await renderCard({item, listItem});
+      expect(view.getByText(zh.update)).toHaveStyle({color: color.ham_blue});
+    });
+
+    it('derives translucent backgrounds from the gray accent', async () => {
+      const item = makeScoreCalcItem({version: 1});
+      const view = await renderCard({item});
+      const backgrounds = findStyleValues(view.toJSON(), 'backgroundColor').map(
+        String,
+      );
+      // The enclosing Card paints its own background, so look for the
+      // alpha-suffixed gray the card derives for its icon surface.
+      const gray = String(color.ham_gray);
+      const translucent = backgrounds.filter(
+        background =>
+          background.startsWith(gray) && background.length > gray.length,
+      );
+      expect(translucent.length).toBeGreaterThan(0);
+    });
+
+    it('renders the title in the medium headline style', async () => {
+      const item = makeScoreCalcItem({version: 1});
+      const view = await renderCard({item});
+      expect(view.getByTestId(`${TEST_ID}-title`)).toHaveStyle({
+        fontSize: 16,
+        fontWeight: '500',
       });
     });
   });

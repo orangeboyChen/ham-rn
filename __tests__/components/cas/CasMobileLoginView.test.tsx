@@ -1,3 +1,4 @@
+import React from 'react';
 import {Appearance, Linking, Platform} from 'react-native';
 import {fireEvent, render, screen} from '@testing-library/react-native';
 import CookieManager from '@preeternal/react-native-cookie-manager';
@@ -5,12 +6,17 @@ import type {Cookie} from '@preeternal/react-native-cookie-manager';
 import CasMobileLoginView from '@/components/cas/CasMobileLoginView';
 import CasMobileLoginModule from '@/modules/NativeCasMobileLoginModule';
 
+/**
+ * React 19 passes `ref` as a regular entry in `props` (which is frozen in
+ * dev), so `testID` must be applied *after* the spread: a `testID` written
+ * first would be silently overwritten by the component's own (undefined) one.
+ */
 jest.mock('react-native-webview', () => {
   const react = require('react');
   const {View} = require('react-native');
   return {
     WebView: (props: object) =>
-      react.createElement(View, {testID: 'webview', ...props}),
+      react.createElement(View, {...props, testID: 'webview'}),
   };
 });
 
@@ -22,6 +28,14 @@ jest.mock('@preeternal/react-native-cookie-manager', () => ({
     get: jest.fn(() => Promise.resolve({})),
   },
 }));
+
+/**
+ * The `Linking.openURL` typing resolves to `Promise<void>` in this RN version,
+ * so the stub is supplied through `mockImplementation` rather than the
+ * `mockResolvedValue(true)` shorthand.
+ */
+const spyOpenURL = () =>
+  jest.spyOn(Linking, 'openURL').mockImplementation(() => Promise.resolve());
 
 const CAS_MOBILE_LOGIN_URL =
   'https://cas.whu.edu.cn/authserver/mobile/auth?appId=985180443';
@@ -338,7 +352,7 @@ describe('login guard', () => {
 
 describe('privacy policy', () => {
   it('opens the privacy policy externally and blocks navigation', async () => {
-    const openURL = jest.spyOn(Linking, 'openURL').mockResolvedValue(true);
+    const openURL = spyOpenURL();
     await render(<CasMobileLoginView />);
     expect(
       webviewProps().onShouldStartLoadWithRequest({
@@ -352,7 +366,7 @@ describe('privacy policy', () => {
   });
 
   it('does not open external URLs for other requests', async () => {
-    const openURL = jest.spyOn(Linking, 'openURL').mockResolvedValue(true);
+    const openURL = spyOpenURL();
     await render(<CasMobileLoginView />);
     expect(
       webviewProps().onShouldStartLoadWithRequest({

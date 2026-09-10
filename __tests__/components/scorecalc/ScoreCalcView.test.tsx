@@ -7,7 +7,6 @@
  * side push a new selection into the tree.
  */
 import React from 'react';
-import type {JsonElement, JsonNode} from '@testing-library/react-native';
 import {act, render, renderHook, waitFor} from '@testing-library/react-native';
 import {Appearance, Platform} from 'react-native';
 import type * as SafeAreaContextType from 'react-native-safe-area-context';
@@ -47,17 +46,29 @@ const setCurrentCalc = (item: ScoreCalcItem | string | undefined): void => {
   );
 };
 
+/**
+ * Node in RNTL's rendered JSON tree. The helper types it as `unknown` and
+ * narrows, matching how the other suites in this repo walk the tree.
+ */
+type JsonNode = unknown;
+
 /** Walk the rendered JSON tree for the first style carrying `key`. */
-const findStyleValue = (node: JsonNode | null, key: string): unknown => {
-  if (!node || typeof node === 'string') {
+const findStyleValue = (node: JsonNode, key: string): unknown => {
+  if (node === null || typeof node !== 'object') {
     return undefined;
   }
-  const element = node as JsonElement;
+  const element = node as {
+    props?: {style?: unknown};
+    children?: JsonNode[];
+  };
   const style = element.props?.style;
-  const styles = Array.isArray(style) ? style : [style];
+  const styles = (Array.isArray(style) ? style : [style]).filter(
+    (entry): entry is Record<string, unknown> =>
+      !!entry && typeof entry === 'object',
+  );
   for (const entry of styles) {
-    if (entry && typeof entry === 'object' && key in entry) {
-      return (entry as Record<string, unknown>)[key];
+    if (key in entry) {
+      return entry[key];
     }
   }
   for (const child of element.children ?? []) {
@@ -70,16 +81,15 @@ const findStyleValue = (node: JsonNode | null, key: string): unknown => {
 };
 
 /** Collect every text node rendered underneath `node`. */
-const collectText = (node: JsonNode | null): string[] => {
-  if (!node) {
-    return [];
-  }
+const collectText = (node: JsonNode): string[] => {
   if (typeof node === 'string') {
     return [node];
   }
-  const element = node as JsonElement;
-  const own = element.children ?? [];
-  return own.flatMap(child => collectText(child));
+  if (node === null || typeof node !== 'object') {
+    return [];
+  }
+  const children = (node as {children?: JsonNode[]}).children ?? [];
+  return children.flatMap(child => collectText(child));
 };
 
 const setOS = (os: 'ios' | 'android'): void => {
