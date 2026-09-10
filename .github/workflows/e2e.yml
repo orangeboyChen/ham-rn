@@ -17,8 +17,9 @@ concurrency:
 
 env:
   HUSKY: '0'
-  # Both jobs run on macOS: the Android emulator needs hardware acceleration,
-  # which GitHub's ubuntu runners do not provide.
+  # iOS runs on macOS (the simulator needs Xcode); Android runs on Linux,
+  # where /dev/kvm gives the emulator hardware acceleration. See the android
+  # job below.
   MAESTRO_VERSION: '2.10.0'
 
 jobs:
@@ -125,10 +126,25 @@ jobs:
           if-no-files-found: ignore
 
   android:
-    runs-on: macos-15
+    # Linux, not macOS. GitHub's ubuntu runners expose /dev/kvm, so the
+    # emulator gets hardware acceleration; macOS runners have none, and the
+    # same emulator falls back to software rendering and Maestro times out
+    # waiting for the app. The KVM step below is what makes the device
+    # usable — without it the runner user cannot open /dev/kvm.
+    runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
+
+      # Grant the runner user access to /dev/kvm so the emulator can use
+      # hardware acceleration. Must run before the emulator starts.
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -173,9 +189,9 @@ jobs:
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
 
-      # gradle-action sets up the SDK and starts the emulator, and installs
-      # the APK it is pointed at. API 30 is the oldest image with reliable
-      # hardware acceleration on macOS runners.
+      # The action installs the SDK, starts the emulator, and runs the script
+      # against it. API 30 is the oldest image with reliable hardware
+      # acceleration on these runners.
       - name: Run Android flows
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -184,6 +200,10 @@ jobs:
           target: google_apis
           profile: pixel_4
           avd-name: e2e
+          # Disable animations: Maestro's default settle wait is far too short
+          # for an RN bundle launch on a cold emulator, and animating
+          # transitions keep the hierarchy "unsettled" long past it.
+          disable-animations: true
           script: |
             adb install -r android/app/build/outputs/apk/release/app-release.apk
             maestro test .maestro/android/scorecalc.yaml
